@@ -1,0 +1,15 @@
+{
+  "name": "three-doors",
+  "version": "2.0.0",
+  "description": "Three Doors \u2014 the Kingdome of Hearts. A warm, dreamlike, image-forward narrative game built as one infinitely recursive convergence loop.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test_loop_engine.js && node tests/test_doors_routes.js",
+    "curator": "node scripts/build-verify-gallery.js"
+  },
+  "dependencies": {
+    "google-auth-library": "^9.0.0"
+  },
+  "license": "MIT"
+}
