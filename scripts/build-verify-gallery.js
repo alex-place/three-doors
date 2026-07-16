@@ -1,13 +1,18 @@
-// build-verify-gallery.js — the 7 canonical door folders (the timeline), every CDN
-// image in its hand-sorted folder, with the chosen scene-hero / door-card picks
-// starred. This page is the human verification surface: eyeball a folder, spot a
-// misfit, move its id in data/three-doors/art-timeline.json.
+// build-verify-gallery.js — emits public/art-verify.html: the interactive art
+// curation tool for the 7 canonical door folders (the timeline).
+//
+//   · drag a tile to another folder (or between tiles) to re-sort the timeline
+//   · click a title to edit it (Enter or click-away commits)
+//   · every change autosaves to localStorage; Export downloads the updated
+//     art-timeline.json + manifest.json to commit back to the repo
+//
+// Order within a folder is meaningful: it is the curated preference order the
+// game uses when drawing loop art for that stage.
 const fs = require("fs");
+const path = require("path");
 const m = require("../public/assets/content/koh/manifest.json");
 const timeline = require("../data/three-doors/art-timeline.json");
 const picks = require("../data/three-doors/door-art-picks.json");
-const byId = Object.fromEntries(m.items.map((i) => [i.id, i]));
-const base = m.base;
 
 const heroOf = {};
 for (const [scene, p] of Object.entries(picks.heroes)) heroOf[p.pick] = "HERO " + scene;
@@ -25,31 +30,224 @@ const FOLDERS = [
   ["reference", "✎ Cast canon — Alex's hand-drawn references (outside the timeline)"],
 ];
 
-let html = `<!doctype html><meta charset=utf-8><title>Three Doors — art timeline (7 folders)</title><style>
-body{background:#0c0b10;color:#e8e2d8;font:14px/1.4 Georgia,serif;margin:0;padding:20px;max-width:1240px;margin-inline:auto}
-h1{font-size:21px;color:#ffd27f} p.intro{color:#9a93a8}
+const ITEMS = {};
+for (const it of m.items) ITEMS[it.id] = { title: it.title || "", thumb: it.thumb, cat: it.cat || null };
+
+const DATA = {
+  base: m.base,
+  folders: FOLDERS,
+  timeline: Object.fromEntries(FOLDERS.map(([k]) => [k, timeline[k] || []])),
+  items: ITEMS,
+  badges: { ...heroOf, ...doorOf },
+};
+
+const html = `<!doctype html><meta charset=utf-8><title>Three Doors — art timeline curator</title><style>
+body{background:#0c0b10;color:#e8e2d8;font:14px/1.4 Georgia,serif;margin:0;padding:20px 20px 90px;max-width:1240px;margin-inline:auto}
+h1{font-size:21px;color:#ffd27f} p.intro{color:#9a93a8;max-width:70em}
 h2{margin:30px 0 8px;font-size:16px;color:#ffd27f;border-bottom:1px solid #2c2a33;padding-bottom:5px}
-.g{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
-.c{background:#16161d;padding:4px;border-radius:4px;position:relative}
-.c img{width:100%;height:130px;object-fit:cover;display:block;border-radius:3px}
-.c .t{font:11px monospace;color:#8fd6b8;padding:3px 1px 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+h2 .count{color:#66607a;font-size:13px}
+.g{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;min-height:80px;border-radius:6px;padding:4px}
+.g.dragover{outline:2px dashed #ffd27f;background:#17140c}
+.c{background:#16161d;padding:4px;border-radius:4px;position:relative;cursor:grab}
+.c.dragging{opacity:.35}
+.c.dropbefore::before{content:"";position:absolute;left:-5px;top:4px;bottom:4px;width:3px;background:#ffd27f;border-radius:2px}
+.c img{width:100%;height:130px;object-fit:cover;display:block;border-radius:3px;pointer-events:none}
+.c .t{font:11px monospace;color:#8fd6b8;padding:3px 1px 0;min-height:14px;outline:none;border-radius:2px}
+.c .t:focus{background:#0d2b22}
+.c .t.edited{color:#ffd27f}
 .c .i{font:10px monospace;color:#5d5870}
 .c.pick{outline:2px solid #ffd27f}
-.c .badge{position:absolute;top:6px;left:6px;background:#ffd27fee;color:#201a08;font:10px monospace;padding:1px 5px;border-radius:3px;max-width:85%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.c .badge{position:absolute;top:6px;left:6px;background:#ffd27fee;color:#201a08;font:10px monospace;padding:1px 5px;border-radius:3px;max-width:85%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:none}
+#bar{position:fixed;left:0;right:0;bottom:0;background:#14121aee;border-top:1px solid #2c2a33;padding:10px 22px;display:flex;gap:14px;align-items:center;font:13px monospace;backdrop-filter:blur(4px)}
+#bar .stat{color:#9a93a8;flex:1}
+#bar button{background:#ffd27f;color:#201a08;border:0;border-radius:5px;padding:7px 14px;font:600 13px monospace;cursor:pointer}
+#bar button.ghost{background:transparent;color:#9a93a8;border:1px solid #3a3745}
 </style>
-<h1>Three Doors — the seven canonical door folders (the timeline)</h1>
-<p class=intro>Every CDN image, hand-sorted. ★-outlined tiles are the chosen scene-hero / door-card art. To move an image, edit <code>data/three-doors/art-timeline.json</code>; to change a pick, edit <code>data/three-doors/door-art-picks.json</code>.</p>`;
-
-for (const [key, label] of FOLDERS) {
-  const ids = timeline[key] || [];
-  html += `<h2>${label} — ${ids.length} images</h2><div class=g>`;
-  for (const id of ids) {
-    const it = byId[id];
-    if (!it) continue;
-    const badge = heroOf[id] || doorOf[id];
-    html += `<div class="c${badge ? " pick" : ""}">${badge ? `<div class=badge>★ ${badge}</div>` : ""}<img loading=eager src="${base}${it.thumb}"><div class=t>${it.title || "(untitled)"}</div><div class=i>${id}</div></div>`;
+<h1>Three Doors — art timeline curator</h1>
+<p class=intro>Every CDN image, hand-sorted into the seven canonical door folders (the timeline).
+<b>Drag</b> a tile to reorder within a folder or move it to another era. <b>Click a title</b> to rename it.
+★-outlined tiles are the chosen scene-hero / door-card art. Order within a folder is the preference
+order the game uses when drawing loop art. Changes autosave in this browser; <b>Export</b> downloads
+the updated <code>art-timeline.json</code> + <code>manifest.json</code> to commit.</p>
+<div id=root></div>
+<div id=bar>
+  <span class=stat id=stat>no local changes</span>
+  <button class=ghost id=reset>Reset to committed</button>
+  <button id=exportTimeline>Export art-timeline.json</button>
+  <button id=exportManifest>Export manifest.json</button>
+</div>
+<script>
+const DATA = ${JSON.stringify(DATA)};
+const MANIFEST_ITEMS = ${JSON.stringify(m.items)};
+const LS_KEY = "three-doors-art-curation-v1";
+let state = { timeline: JSON.parse(JSON.stringify(DATA.timeline)), titles: {} };
+try {
+  const saved = JSON.parse(localStorage.getItem(LS_KEY) || "null");
+  if (saved && saved.timeline) {
+    // keep only ids that still exist; append newly committed ids at folder ends
+    const valid = new Set(Object.keys(DATA.items));
+    const savedSet = new Set(Object.values(saved.timeline).flat());
+    for (const k of Object.keys(state.timeline)) {
+      const savedIds = (saved.timeline[k] || []).filter((id) => valid.has(id));
+      const fresh = DATA.timeline[k].filter((id) => !savedSet.has(id));
+      state.timeline[k] = [...savedIds, ...fresh];
+    }
+    state.titles = saved.titles || {};
   }
-  html += `</div>`;
+} catch (_e) {}
+
+let moves = 0;
+function persist() {
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
+  const retitles = Object.keys(state.titles).length;
+  document.getElementById("stat").textContent = (moves || retitles)
+    ? moves + " move(s) this session · " + retitles + " retitle(s) — autosaved locally, Export to commit"
+    : "no local changes";
 }
-fs.writeFileSync(require("path").join(__dirname, "../public/art-verify.html"), html);
-console.log("timeline gallery:", FOLDERS.length, "folders");
+
+function titleOf(id) { return state.titles[id] != null ? state.titles[id] : DATA.items[id].title; }
+
+const root = document.getElementById("root");
+function render() {
+  root.innerHTML = "";
+  for (const [key, label] of DATA.folders) {
+    const h = document.createElement("h2");
+    h.innerHTML = label + ' <span class=count>— ' + state.timeline[key].length + " images</span>";
+    root.appendChild(h);
+    const g = document.createElement("div");
+    g.className = "g"; g.dataset.folder = key;
+    for (const id of state.timeline[key]) {
+      const it = DATA.items[id];
+      if (!it) continue;
+      const c = document.createElement("div");
+      c.className = "c" + (DATA.badges[id] ? " pick" : "");
+      c.draggable = true; c.dataset.id = id;
+      c.innerHTML = (DATA.badges[id] ? '<div class=badge>★ ' + DATA.badges[id] + "</div>" : "")
+        + '<img loading=lazy src="' + DATA.base + it.thumb + '">'
+        + '<div class="t' + (state.titles[id] != null ? " edited" : "") + '" contenteditable spellcheck=false>' + titleOf(id).replace(/</g, "&lt;") + "</div>"
+        + '<div class=i>' + id + "</div>";
+      g.appendChild(c);
+    }
+    root.appendChild(g);
+  }
+}
+
+// ── drag & drop ──
+let dragId = null;
+
+// Edge auto-scroll while grabbing: hold a tile near the top/bottom of the
+// viewport and the page scrolls, so a tile can be carried between distant
+// eras. Speed ramps with proximity to the edge; runs on rAF so it keeps
+// scrolling even when the pointer holds still at the edge.
+let _dragClientY = null, _scrollRaf = null;
+function autoScrollTick() {
+  if (_dragClientY == null) { _scrollRaf = null; return; }
+  const EDGE = 120, MAX = 26;
+  let dy = 0;
+  if (_dragClientY < EDGE) dy = -MAX * (1 - _dragClientY / EDGE);
+  else if (_dragClientY > innerHeight - EDGE) dy = MAX * (1 - (innerHeight - _dragClientY) / EDGE);
+  if (dy) window.scrollBy(0, dy);
+  _scrollRaf = requestAnimationFrame(autoScrollTick);
+}
+document.addEventListener("dragover", (e) => {
+  if (!dragId) return;
+  _dragClientY = e.clientY;
+  if (_scrollRaf == null) _scrollRaf = requestAnimationFrame(autoScrollTick);
+});
+
+root.addEventListener("dragstart", (e) => {
+  const c = e.target.closest(".c");
+  if (!c) return;
+  dragId = c.dataset.id;
+  c.classList.add("dragging");
+  e.dataTransfer.setData("text/plain", dragId);
+  e.dataTransfer.effectAllowed = "move";
+});
+document.addEventListener("dragend", () => {
+  dragId = null;
+  _dragClientY = null;
+  root.querySelectorAll(".dragging,.dropbefore").forEach((x) => x.classList.remove("dragging", "dropbefore"));
+  root.querySelectorAll(".g.dragover").forEach((x) => x.classList.remove("dragover"));
+});
+root.addEventListener("dragover", (e) => {
+  if (!dragId) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  root.querySelectorAll(".dropbefore").forEach((x) => x.classList.remove("dropbefore"));
+  root.querySelectorAll(".g.dragover").forEach((x) => x.classList.remove("dragover"));
+  const tile = e.target.closest(".c");
+  const grid = e.target.closest(".g");
+  if (tile && tile.dataset.id !== dragId) tile.classList.add("dropbefore");
+  else if (grid) grid.classList.add("dragover");
+});
+root.addEventListener("drop", (e) => {
+  if (!dragId) return;
+  e.preventDefault();
+  const tile = e.target.closest(".c");
+  const grid = e.target.closest(".g");
+  if (!grid) return;
+  const from = Object.keys(state.timeline).find((k) => state.timeline[k].includes(dragId));
+  const to = grid.dataset.folder;
+  if (!from || !to) return;
+  _dragClientY = null;
+  state.timeline[from] = state.timeline[from].filter((x) => x !== dragId);
+  if (tile && tile.dataset.id !== dragId) {
+    const arr = state.timeline[to];
+    arr.splice(arr.indexOf(tile.dataset.id), 0, dragId);
+  } else {
+    state.timeline[to].push(dragId);
+  }
+  moves++;
+  persist(); render();
+});
+
+// ── editable titles (commit live on input; focusout just re-normalizes) ──
+function commitTitle(t) {
+  const id = t.closest(".c").dataset.id;
+  const v = t.textContent.trim();
+  if (v === DATA.items[id].title) delete state.titles[id];
+  else state.titles[id] = v;
+  t.classList.toggle("edited", state.titles[id] != null);
+  persist();
+}
+root.addEventListener("input", (e) => {
+  const t = e.target.closest(".t");
+  if (t) commitTitle(t);
+});
+root.addEventListener("focusout", (e) => {
+  const t = e.target.closest(".t");
+  if (t) commitTitle(t);
+});
+root.addEventListener("keydown", (e) => {
+  if (e.target.closest(".t") && e.key === "Enter") { e.preventDefault(); e.target.blur(); }
+});
+
+// ── export / reset ──
+function download(name, obj) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2) + "\\n"], { type: "application/json" }));
+  a.download = name;
+  a.click();
+}
+document.getElementById("exportTimeline").onclick = () => {
+  download("art-timeline.json", Object.assign(
+    { _comment: "Every KOH CDN image hand-sorted into one of the 7 canonical door folders (the timeline). Order within a folder = curated preference order for loop art. Exported from art-verify.html." },
+    state.timeline));
+};
+document.getElementById("exportManifest").onclick = () => {
+  const items = MANIFEST_ITEMS.map((it) => state.titles[it.id] != null
+    ? Object.assign({}, it, { title: state.titles[it.id], titled_by: "curator" })
+    : it);
+  download("manifest.json", { base: DATA.base, items });
+};
+document.getElementById("reset").onclick = () => {
+  if (!confirm("Discard local moves and retitles, back to the committed sort?")) return;
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+};
+
+render(); persist();
+</script>`;
+
+fs.writeFileSync(path.join(__dirname, "../public/art-verify.html"), html);
+console.log("interactive curator written:", FOLDERS.length, "folders,", Object.keys(ITEMS).length, "items");
