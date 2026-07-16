@@ -1,0 +1,304 @@
+{
+  "_comment": "Hand-curated KOH CDN art per spine scene + door. pick = chosen id, alts = runners-up shown in the verification gallery.",
+  "heroes": {
+    "castle-balcony": {
+      "pick": "6c75c0de05",
+      "alts": [
+        "707aa89362",
+        "ff89b88bf6",
+        "ec8d9e9235"
+      ],
+      "why": "Moonlit Garden Door — night, sea, moon: the vigil balcony mood"
+    },
+    "kingdome-garden": {
+      "pick": "a1b567ddf0",
+      "alts": [
+        "9870902655",
+        "c911e15a48",
+        "99233f8be8"
+      ],
+      "why": "Garden Gate Crossing — radiant gate, companions crossing home; no baked-in text (the 'KoH doors' board and 'Garden Door' card have lettering)"
+    },
+    "cloverfield": {
+      "pick": "56a2fe2241",
+      "alts": [
+        "12c05343f2",
+        "8131c53d69",
+        "780b381c84"
+      ],
+      "why": "Verdant Doors — green, alive, ordinary-day sacred"
+    },
+    "future-doors": {
+      "pick": "89de9ab297",
+      "alts": [
+        "ba0a53b095",
+        "97bf951ea9",
+        "283a464ec6"
+      ],
+      "why": "Three Future Paths — the branching orchard, title exact"
+    },
+    "xp-door": {
+      "pick": "963cffae79",
+      "alts": [
+        "badf4abc99",
+        "43c7902d5f",
+        "815a9357db"
+      ],
+      "why": "Gage's XP Door — the glitched nostalgia door itself"
+    },
+    "xenon-convergence": {
+      "pick": "bbcf3a24e1",
+      "alts": [
+        "76a27ff5b4",
+        "1e86fa952c",
+        "9458443573"
+      ],
+      "why": "Xenon Door — cosmic convergence"
+    },
+    "sigil-city": {
+      "pick": "aecfd7cfa9",
+      "alts": [
+        "bebbfc7e05",
+        "dea576aebf",
+        "9870902655"
+      ],
+      "why": "City of Doors Yggdrasil Convergence — every door leads here"
+    },
+    "fog-door-return": {
+      "pick": "e7651afc90",
+      "alts": [
+        "bc91274f5a",
+        "2b9e29a95c",
+        "21f4f8405e"
+      ],
+      "why": "The Threshold Mist — painterly fog threshold (The Fog Door image is a text lore-card)"
+    }
+  },
+  "doors": {
+    "castle-balcony/The Wishing Rail": {
+      "pick": "ec8d9e9235",
+      "alts": [
+        "b8d1815606",
+        "941860b493"
+      ],
+      "why": "Gothic Bridge Night — lantern-lit stone rail at night"
+    },
+    "castle-balcony/The Brass Spyglass": {
+      "pick": "fecfd461c0",
+      "alts": [
+        "13881d4a84",
+        "74f0001a7a"
+      ],
+      "why": "Tower of Signals — a new light far out"
+    },
+    "castle-balcony/The Knee-High Door": {
+      "pick": "f86ecd3cd4",
+      "alts": [
+        "12c05343f2",
+        "42958cd836"
+      ],
+      "why": "Elephant Oasis Door — Joy is already reaching for it"
+    },
+    "kingdome-garden/Ancient Doors": {
+      "pick": "c93b224d23",
+      "alts": [
+        "064f25a37d",
+        "6d13b67931",
+        "f5899d340d"
+      ],
+      "why": "Grotto Library — history/evolution/religion (prior curated)"
+    },
+    "kingdome-garden/The Cloverfield": {
+      "pick": "12c05343f2",
+      "alts": [
+        "7c8690db6c",
+        "56a2fe2241"
+      ],
+      "why": "The Green Door — painted clover-green"
+    },
+    "kingdome-garden/Tomorrow Door": {
+      "pick": "ba0a53b095",
+      "alts": [
+        "283a464ec6",
+        "97bf951ea9"
+      ],
+      "why": "Three Glowing Doorways — the world that's coming (The Next Three Doors is a text spread)"
+    },
+    "kingdome-garden/The XP Door [GLITCHED]": {
+      "pick": "badf4abc99",
+      "alts": [
+        "43c7902d5f",
+        "815a9357db"
+      ],
+      "why": "The Arcade Door — corrupted nostalgic liminal (Glitch Cat Room is a framed card)"
+    },
+    "kingdome-garden/Xenon Starship": {
+      "pick": "1e86fa952c",
+      "alts": [
+        "3b5173d525",
+        "6d34566de3"
+      ],
+      "why": "Xenon Ring of Ships Twelve Point Mandala — all planets, midway, converge"
+    },
+    "kingdome-garden/Sigil, City of Doors": {
+      "pick": "f7f75345ab",
+      "alts": [
+        "bebbfc7e05",
+        "dea576aebf"
+      ],
+      "why": "Sigil Back Doors — the meta-hub from its alleys"
+    },
+    "kingdome-garden/Fog Door Return": {
+      "pick": "2b9e29a95c",
+      "alts": [
+        "e7651afc90",
+        "7a4372276e"
+      ],
+      "why": "Rainy Threshold — the misty way back seen from the garden (Threshold Mist promoted to fog hero)"
+    },
+    "cloverfield/The Lucky Door": {
+      "pick": "cdab529949",
+      "alts": [
+        "fe0f073fdb",
+        "084ee0fb0c"
+      ],
+      "why": "Three Doors — jeweled: shinies and lucky finds"
+    },
+    "cloverfield/The Today Door": {
+      "pick": "780b381c84",
+      "alts": [
+        "638abf6e23",
+        "7a0ea23864"
+      ],
+      "why": "Garden Cafe Couple — the day you are actually in, alive"
+    },
+    "cloverfield/The Tomorrow Door": {
+      "pick": "71eb4513be",
+      "alts": [
+        "ba0a53b095",
+        "2b9e29a95c"
+      ],
+      "why": "Sunset Pilgrim — walking toward the world that's coming"
+    },
+    "future-doors/The Bright Branch": {
+      "pick": "b7442bd63a",
+      "alts": [
+        "a6506c27c6",
+        "8bda1f9713"
+      ],
+      "why": "Golden Portal Door — a future where the gardens won"
+    },
+    "future-doors/The Unwritten Door": {
+      "pick": "6d3d23258a",
+      "alts": [
+        "3bfc18ee61",
+        "dd7f458749"
+      ],
+      "why": "Doorway Sketch I — literally unfinished, the hinge waits"
+    },
+    "future-doors/The Recursive Door": {
+      "pick": "5b50ea2f23",
+      "alts": [
+        "e8de91fc28",
+        "eb0d90174f"
+      ],
+      "why": "Vortex Sketch — a hallway of itself, smaller each time (The Spiral reads as a network diagram)"
+    },
+    "xp-door/System Restore": {
+      "pick": "ff89b88bf6",
+      "alts": [
+        "9458443573",
+        "f84f0be576"
+      ],
+      "why": "Starlit Bedroom — the saved point, an old summer loading"
+    },
+    "xp-door/My Documents": {
+      "pick": "df58212c11",
+      "alts": [
+        "89ab41e07d",
+        "8f6682dd31"
+      ],
+      "why": "24 Canvas grid — every picture you ever saved"
+    },
+    "xp-door/unknown.exe": {
+      "pick": "815a9357db",
+      "alts": [
+        "43c7902d5f",
+        "09a536c78c"
+      ],
+      "why": "Glitch Monster — publisher: unknown; you run it anyway"
+    },
+    "xenon-convergence/The Mirror Door": {
+      "pick": "a04553d1d7",
+      "alts": [
+        "9d61ea4483",
+        "70bd237a68"
+      ],
+      "why": "Valtoris Fein Three States Concept — as you were, are, might be"
+    },
+    "xenon-convergence/The Branch Door": {
+      "pick": "9b2dc443b3",
+      "alts": [
+        "9a03a44601",
+        "ba0a53b095"
+      ],
+      "why": "Doors Triptych II — infinite versions, each leading somewhere true"
+    },
+    "xenon-convergence/The Merge Door": {
+      "pick": "da3469ff5d",
+      "alts": [
+        "6b71d59fae",
+        "02e5a21a85"
+      ],
+      "why": "Orrery Medallion — all paths collapse into one golden point (Mandala reads as a diagram)"
+    },
+    "sigil-city/The Gallery of Walked Doors": {
+      "pick": "eb0d90174f",
+      "alts": [
+        "df58212c11",
+        "54ccc725bb"
+      ],
+      "why": "Gallery of Frames — your whole path hung in one hall"
+    },
+    "sigil-city/The Key Market": {
+      "pick": "0d52060b02",
+      "alts": [
+        "7351c2df1b",
+        "54ccc725bb"
+      ],
+      "why": "Treasure Keeper — stalls of keys not yet dreamed"
+    },
+    "sigil-city/The Lady's Gate": {
+      "pick": "82e7d51121",
+      "alts": [
+        "ee9dce4ba0",
+        "e324058a84"
+      ],
+      "why": "Queen of Diamonds — silent, watched, absolutely fair"
+    },
+    "fog-door-return/The Garden Gate": {
+      "pick": "c911e15a48",
+      "alts": [
+        "a1b567ddf0",
+        "f1d0f94a7c"
+      ],
+      "why": "Wizard's Garden — the bright way straight home (Garden Gate Crossing promoted to garden hero)"
+    },
+    "fog-door-return/The Long Way Round": {
+      "pick": "a024a5370d",
+      "alts": [
+        "21f4f8405e",
+        "af9ef79eb1"
+      ],
+      "why": "The Long March — arrive when you're ready, not before"
+    },
+    "fog-door-return/Lantern's Shortcut": {
+      "pick": "ca58f592ba",
+      "alts": [
+        "b1f4345a7e",
+        "828c47dc48"
+      ],
+      "why": "Lantern Bearer — follow the steady flame"
+    }
+  }
+}
