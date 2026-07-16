@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+
+# Local player state / training outputs (never commit private cubes or weights)
+data/csf/
+*.csf
+models/three-doors-vision/
+models/*.pkl
+training_data/
+data/images/
+
+# OS noise
+Thumbs.db
+.DS_Store

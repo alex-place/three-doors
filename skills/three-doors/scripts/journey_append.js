@@ -3,9 +3,9 @@
 // journey log, or read the current state back from its tail.
 //
 // Chat play (this skill) and the web game at /three-doors-game.html share one
-// world through `data/three-doors/journey.jsonl` in the lantern-os repo. This
+// world through `data/three-doors/journey.jsonl` in this repo. This
 // script writes the SAME pinned entry schema the server route
-// (apps/lantern-garage/routes/doors.js) writes, with `source:"skill"`, so the
+// (server/routes/doors.js) writes, with `source:"skill"`, so the
 // two surfaces interleave in one append-only log. Nothing is ever deleted or
 // rewritten — state shifts only by appending (a `reset` pref newer than the
 // last turn means "fresh game"; the history stays).
@@ -55,19 +55,23 @@ function cleanStr(v, max) {
   return v.replace(/[\u0000-\u001f\u007f]/g, " ").trim().slice(0, max);
 }
 
-// Walk up ≤8 levels from cwd looking for the repo's file-queue; the skill lives
-// OUTSIDE any repo, so also try the fixed candidate C:\dev\lantern-os.
+// Walk up ≤8 levels from cwd looking for the game repo root (the dir holding
+// data/three-doors or skills/three-doors). THREE_DOORS_REPO_ROOT overrides —
+// point it at a lantern-os checkout to keep appending to the monorepo's log
+// during the transition (same data/three-doors/journey.jsonl path either way).
 function findRepoRoot() {
-  const marker = path.join("apps", "lantern-garage", "lib", "file-queue.js");
+  const isRoot = (dir) =>
+    fs.existsSync(path.join(dir, "data", "three-doors")) ||
+    fs.existsSync(path.join(dir, "skills", "three-doors", "SKILL.md"));
+  const env = process.env.THREE_DOORS_REPO_ROOT;
+  if (env && isRoot(path.resolve(env))) return path.resolve(env);
   let dir = path.resolve(process.cwd());
   for (let i = 0; i < 8; i++) {
-    if (fs.existsSync(path.join(dir, marker))) return dir;
+    if (isRoot(dir)) return dir;
     const up = path.dirname(dir);
     if (up === dir) break;
     dir = up;
   }
-  const fixed = "C:\\dev\\lantern-os";
-  if (fs.existsSync(path.join(fixed, marker))) return fixed;
   return null;
 }
 

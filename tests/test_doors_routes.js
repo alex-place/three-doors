@@ -1,5 +1,5 @@
 /**
- * Tests for apps/lantern-garage/routes/doors.js (Three Doors web API, 1.8.18)
+ * Tests for server/routes/doors.js (Three Doors web API, 1.8.18)
  * Run: node tests/test_doors_routes.js
  *
  * Exercises the exported pure helpers (sanitizePlayer, cleanImagePath,
@@ -38,7 +38,7 @@ module.exports = {
 global.__CR_CALLS__ = crCalls;
 
 const REPO_ROOT = path.resolve(__dirname, "..");
-const routeSrc = fs.readFileSync(path.join(REPO_ROOT, "apps/lantern-garage/routes/doors.js"), "utf8")
+const routeSrc = fs.readFileSync(path.join(REPO_ROOT, "server/routes/doors.js"), "utf8")
   .replace('require("../lib/convergence-records")', `require(${JSON.stringify(crTmp)})`);
 const routeTmp = path.join(TMP, "doors-route.js");
 fs.writeFileSync(routeTmp, routeSrc);
