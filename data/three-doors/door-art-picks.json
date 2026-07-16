@@ -14,26 +14,21 @@
       "pick": "a1b567ddf0",
       "alts": [
         "9870902655",
-        "c911e15a48",
-        "99233f8be8"
+        "c911e15a48"
       ],
       "why": "Garden Gate Crossing — radiant gate, companions crossing home; no baked-in text (the 'KoH doors' board and 'Garden Door' card have lettering)"
     },
     "cloverfield": {
       "pick": "56a2fe2241",
       "alts": [
-        "12c05343f2",
-        "8131c53d69",
-        "780b381c84"
+        "8131c53d69"
       ],
       "why": "Verdant Doors — green, alive, ordinary-day sacred"
     },
     "future-doors": {
       "pick": "89de9ab297",
       "alts": [
-        "ba0a53b095",
-        "97bf951ea9",
-        "283a464ec6"
+        "ba0a53b095"
       ],
       "why": "Three Future Paths — the branching orchard, title exact"
     },
@@ -94,34 +89,29 @@
     "castle-balcony/The Knee-High Door": {
       "pick": "f86ecd3cd4",
       "alts": [
-        "12c05343f2",
         "42958cd836"
       ],
       "why": "Elephant Oasis Door — Joy is already reaching for it"
     },
     "kingdome-garden/Ancient Doors": {
-      "pick": "c93b224d23",
+      "pick": "6d13b67931",
       "alts": [
-        "064f25a37d",
-        "6d13b67931",
+        "e8bf7e15a2",
         "f5899d340d"
       ],
-      "why": "Grotto Library — history/evolution/religion (prior curated)"
+      "why": "Library of Babylon — history/evolution/religion (Grotto Library was cut in the curation pass)"
     },
     "kingdome-garden/The Cloverfield": {
-      "pick": "12c05343f2",
+      "pick": "7adc2d9977",
       "alts": [
-        "7c8690db6c",
-        "56a2fe2241"
+        "56a2fe2241",
+        "7c8690db6c"
       ],
-      "why": "The Green Door — painted clover-green"
+      "why": "Verdant Doorway — the clover-green gate (The Green Door was cut)"
     },
     "kingdome-garden/Tomorrow Door": {
       "pick": "ba0a53b095",
-      "alts": [
-        "283a464ec6",
-        "97bf951ea9"
-      ],
+      "alts": [],
       "why": "Three Glowing Doorways — the world that's coming (The Next Three Doors is a text spread)"
     },
     "kingdome-garden/The XP Door [GLITCHED]": {
@@ -165,12 +155,12 @@
       "why": "Three Doors — jeweled: shinies and lucky finds"
     },
     "cloverfield/The Today Door": {
-      "pick": "780b381c84",
+      "pick": "7a0ea23864",
       "alts": [
-        "638abf6e23",
-        "7a0ea23864"
+        "1251578cda",
+        "74f0001a7a"
       ],
-      "why": "Garden Cafe Couple — the day you are actually in, alive"
+      "why": "Tavern Scene — the day you are actually in, alive (Garden Cafe Couple was cut)"
     },
     "cloverfield/The Tomorrow Door": {
       "pick": "71eb4513be",
@@ -213,12 +203,12 @@
       "why": "Starlit Bedroom — the saved point, an old summer loading"
     },
     "xp-door/My Documents": {
-      "pick": "df58212c11",
+      "pick": "33673494dc",
       "alts": [
-        "89ab41e07d",
-        "8f6682dd31"
+        "42958cd836",
+        "dea576aebf"
       ],
-      "why": "24 Canvas grid — every picture you ever saved"
+      "why": "Doors Storybook — every picture you ever saved (24 Canvas grid was cut)"
     },
     "xp-door/unknown.exe": {
       "pick": "815a9357db",
@@ -245,17 +235,16 @@
       "why": "Doors Triptych II — infinite versions, each leading somewhere true"
     },
     "xenon-convergence/The Merge Door": {
-      "pick": "da3469ff5d",
+      "pick": "6b71d59fae",
       "alts": [
-        "6b71d59fae",
-        "02e5a21a85"
+        "02e5a21a85",
+        "e8de91fc28"
       ],
-      "why": "Orrery Medallion — all paths collapse into one golden point (Mandala reads as a diagram)"
+      "why": "Mandala — all paths collapse into one point (Orrery Medallion was cut; this is the one mandala Alex kept)"
     },
     "sigil-city/The Gallery of Walked Doors": {
       "pick": "eb0d90174f",
       "alts": [
-        "df58212c11",
         "54ccc725bb"
       ],
       "why": "Gallery of Frames — your whole path hung in one hall"
@@ -279,8 +268,7 @@
     "fog-door-return/The Garden Gate": {
       "pick": "c911e15a48",
       "alts": [
-        "a1b567ddf0",
-        "f1d0f94a7c"
+        "a1b567ddf0"
       ],
       "why": "Wizard's Garden — the bright way straight home (Garden Gate Crossing promoted to garden hero)"
     },
@@ -295,8 +283,7 @@
     "fog-door-return/Lantern's Shortcut": {
       "pick": "ca58f592ba",
       "alts": [
-        "b1f4345a7e",
-        "828c47dc48"
+        "b1f4345a7e"
       ],
       "why": "Lantern Bearer — follow the steady flame"
     }

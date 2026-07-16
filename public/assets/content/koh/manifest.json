@@ -15,28 +15,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "feec89aafe",
-      "title": "Alex Doors II",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "fcbebd37-e86a-45bb-80fa-2de8af29d554.png",
-      "full": "feec89aafe.webp",
-      "thumb": "feec89aafe-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "25da735119",
-      "title": "Archway Card",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "35e2c1e3-1f49-4dbd-876e-46aeab03f1ec.png",
-      "full": "25da735119.webp",
-      "thumb": "25da735119-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "dea576aebf",
       "title": "Atrium of Doors",
       "cat": "door",
@@ -162,24 +140,6 @@
       "thumb": "f5cd0e8d37-t.webp"
     },
     {
-      "id": "ead957b38e",
-      "title": "Courtney Coven Door Interior Space Buns Thiccer",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "buns",
-        "courtney",
-        "coven",
-        "door",
-        "interior",
-        "space",
-        "thiccer"
-      ],
-      "src": "courtney-coven-door-interior-space-buns-thiccer.png",
-      "full": "ead957b38e.webp",
-      "thumb": "ead957b38e-t.webp"
-    },
-    {
       "id": "6806ef93bb",
       "title": "Crimson Door Chamber",
       "cat": "door",
@@ -237,39 +197,6 @@
       "thumb": "4be25d12aa-t.webp"
     },
     {
-      "id": "69b16514b4",
-      "title": "Doors Board",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "c7196ad2-1871-4178-8f8e-1ae9e75c1911.png",
-      "full": "69b16514b4.webp",
-      "thumb": "69b16514b4-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "4798ac74a1",
-      "title": "Doors Codex",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "ce53bb4c-2969-45d0-b398-5686a64462f6.png",
-      "full": "4798ac74a1.webp",
-      "thumb": "4798ac74a1-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "46df4bdbe2",
-      "title": "Doors Meditation",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "799000b6-1c8f-4efc-b854-cad823c5e3dd (1).png",
-      "full": "46df4bdbe2.webp",
-      "thumb": "46df4bdbe2-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "9b2dc443b3",
       "title": "Doors Triptych II",
       "cat": "door",
@@ -314,32 +241,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "b1432da3c2",
-      "title": "Dream Doors",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "doors",
-        "dream"
-      ],
-      "src": "dream-doors-1780679511544.png",
-      "full": "b1432da3c2.webp",
-      "thumb": "b1432da3c2-t.webp"
-    },
-    {
-      "id": "c248cff9d6",
-      "title": "Dream Doors",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "doors",
-        "dream"
-      ],
-      "src": "dream-doors-1780704943621.png",
-      "full": "c248cff9d6.webp",
-      "thumb": "c248cff9d6-t.webp"
-    },
-    {
       "id": "f86ecd3cd4",
       "title": "Elephant Oasis Door",
       "cat": "door",
@@ -360,21 +261,6 @@
       "full": "8131c53d69.webp",
       "thumb": "8131c53d69-t.webp",
       "titled_by": "vision"
-    },
-    {
-      "id": "3b1898819a",
-      "title": "Founder Wish Real Door",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "door",
-        "founder",
-        "real",
-        "wish"
-      ],
-      "src": "founder-wish-real-door.png",
-      "full": "3b1898819a.webp",
-      "thumb": "3b1898819a-t.webp"
     },
     {
       "id": "6b42dffaad",
@@ -447,17 +333,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "56fd7d689b",
-      "title": "Glowing Door Chamber",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "21fc01cf-174c-4f57-9281-bd42ee32b9fc.png",
-      "full": "56fd7d689b.webp",
-      "thumb": "56fd7d689b-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "b7442bd63a",
       "title": "Golden Portal Door",
       "cat": "door",
@@ -491,21 +366,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "10540121ed",
-      "title": "Jungle Terrarium Three Doors",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "doors",
-        "jungle",
-        "terrarium",
-        "three"
-      ],
-      "src": "jungle-terrarium-three-doors.png",
-      "full": "10540121ed.webp",
-      "thumb": "10540121ed-t.webp"
-    },
-    {
       "id": "9870902655",
       "title": "Kingdome Hall",
       "cat": "door",
@@ -514,28 +374,6 @@
       "src": "4fa9632c-cb73-4bad-9e02-7c833128d471.png",
       "full": "9870902655.webp",
       "thumb": "9870902655-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "f926edc9f0",
-      "title": "Kingdome of Hearts Door",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "ddf25e3f-e82f-4e02-a394-1555947c8165.png",
-      "full": "f926edc9f0.webp",
-      "thumb": "f926edc9f0-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "99233f8be8",
-      "title": "Kingdome of Hearts — doors",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "50a774d9-bc06-4702-b116-f86e28afa20d.png",
-      "full": "99233f8be8.webp",
-      "thumb": "99233f8be8-t.webp",
       "titled_by": "vision"
     },
     {
@@ -583,17 +421,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "f2ebdb6f33",
-      "title": "My Door My Dreams",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "efc784c5-33a8-41b1-825b-04d5f01d58a6.png",
-      "full": "f2ebdb6f33.webp",
-      "thumb": "f2ebdb6f33-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "ee9dce4ba0",
       "title": "Pilgrims' Door",
       "cat": "door",
@@ -631,22 +458,6 @@
       "thumb": "bc7eda8bc4-t.webp"
     },
     {
-      "id": "05913cc9d0",
-      "title": "Raven Room 01 Black Violet Cabaret",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "black",
-        "cabaret",
-        "raven",
-        "room",
-        "violet"
-      ],
-      "src": "raven-room-01-black-violet-cabaret.png",
-      "full": "05913cc9d0.webp",
-      "thumb": "05913cc9d0-t.webp"
-    },
-    {
       "id": "2db461540a",
       "title": "Raven Room 02 Moonlit Greek Villa",
       "cat": "door",
@@ -678,23 +489,6 @@
       "src": "raven-room-03-neon-mermaid-fairy-noir.png",
       "full": "8252a49268.webp",
       "thumb": "8252a49268-t.webp"
-    },
-    {
-      "id": "52ff016670",
-      "title": "Raven Room 04 Masquerade Bed Under Stars",
-      "cat": "door",
-      "status": "auto",
-      "tags": [
-        "bed",
-        "masquerade",
-        "raven",
-        "room",
-        "stars",
-        "under"
-      ],
-      "src": "raven-room-04-masquerade-bed-under-stars.png",
-      "full": "52ff016670.webp",
-      "thumb": "52ff016670-t.webp"
     },
     {
       "id": "9d61ea4483",
@@ -823,17 +617,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "f1d0f94a7c",
-      "title": "The Garden Door",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "41d02e3d-7ac3-4c05-8a86-e4158cab60f3.png",
-      "full": "f1d0f94a7c.webp",
-      "thumb": "f1d0f94a7c-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "54ccc725bb",
       "title": "The Gathering Hall",
       "cat": "door",
@@ -842,39 +625,6 @@
       "src": "2be0781a-e064-4ad4-a483-a8a1c811869a.png",
       "full": "54ccc725bb.webp",
       "thumb": "54ccc725bb-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "12c05343f2",
-      "title": "The Green Door",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "d45da126-6497-4f71-ae07-d4e00b90076b (1).png",
-      "full": "12c05343f2.webp",
-      "thumb": "12c05343f2-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "283a464ec6",
-      "title": "The Next Three Doors",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "55d2a4a1-fdd7-463c-b9f9-4ccdda2bb3eb.png",
-      "full": "283a464ec6.webp",
-      "thumb": "283a464ec6-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "97bf951ea9",
-      "title": "The Next Three Doors II",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "f6993491-027d-4855-bd4d-97e616cbea37.png",
-      "full": "97bf951ea9.webp",
-      "thumb": "97bf951ea9-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1111,17 +861,6 @@
       "thumb": "6d34566de3-t.webp"
     },
     {
-      "id": "fb741a2da3",
-      "title": "Three Doors — A/B/C board",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "1df5241b-c7a8-453c-8eac-51f164ec25a9.png",
-      "full": "fb741a2da3.webp",
-      "thumb": "fb741a2da3-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "964547972c",
       "title": "Three Doors — board",
       "cat": "door",
@@ -1130,28 +869,6 @@
       "src": "081811cb-46d4-4543-8d81-47bf00242556.png",
       "full": "964547972c.webp",
       "thumb": "964547972c-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "7f452bc7ca",
-      "title": "Three Doors — board variant",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "1fcf696d-d0e8-406e-9db4-c4ae3f0c7128.png",
-      "full": "7f452bc7ca.webp",
-      "thumb": "7f452bc7ca-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "04b66adfff",
-      "title": "Three Doors — caravan",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "e9129a92-3728-40ec-9317-29ee47c41276.png",
-      "full": "04b66adfff.webp",
-      "thumb": "04b66adfff-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1174,17 +891,6 @@
       "src": "dbf27041-eba7-4397-9e9b-bc372b44380b.png",
       "full": "cdab529949.webp",
       "thumb": "cdab529949-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "7a57e85a1f",
-      "title": "Three Doors — New Game",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "196e4c56-30f8-4991-bcbf-5240e32dfa7b.png",
-      "full": "7a57e85a1f.webp",
-      "thumb": "7a57e85a1f-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1298,28 +1004,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "c747e0126b",
-      "title": "Witch's Workshop",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "14e8525f-29e0-4050-9225-eebfe9fdaf84.png",
-      "full": "c747e0126b.webp",
-      "thumb": "c747e0126b-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "fec16c8350",
-      "title": "Witch's Workshop II",
-      "cat": "door",
-      "status": "auto",
-      "tags": [],
-      "src": "e7e07a5d-82be-4e09-97f3-b30ce6a9c272.png",
-      "full": "fec16c8350.webp",
-      "thumb": "fec16c8350-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "c911e15a48",
       "title": "Wizard's Garden",
       "cat": "door",
@@ -1360,17 +1044,6 @@
       "thumb": "d8a030a3a6-t.webp"
     },
     {
-      "id": "658d45c00c",
-      "title": "Armored Character Sheet",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "askthar-animated-fullbody-character.png",
-      "full": "658d45c00c.webp",
-      "thumb": "658d45c00c-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "183faf48a4",
       "title": "Axe King",
       "cat": "hero",
@@ -1379,17 +1052,6 @@
       "src": "askthar-the-fool-rabblerock-fein.png",
       "full": "183faf48a4.webp",
       "thumb": "183faf48a4-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "2102ef3fa7",
-      "title": "Bearded Warrior",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "a25791b8-c18b-4d69-bc1e-0c4112db6b1c.png",
-      "full": "2102ef3fa7.webp",
-      "thumb": "2102ef3fa7-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1415,17 +1077,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "d32ca819a1",
-      "title": "Boy with the Cards",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "70ccfd59-b850-46e6-adb5-4c4436aa4bfb.png",
-      "full": "d32ca819a1.webp",
-      "thumb": "d32ca819a1-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "7bd602234a",
       "title": "Caped Hero",
       "cat": "hero",
@@ -1445,17 +1096,6 @@
       "src": "377bbbb9-e49c-4319-9fb2-f7a80b81b1c3.png",
       "full": "50dcfd18bb.webp",
       "thumb": "50dcfd18bb-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "d587545e70",
-      "title": "Cloaked Hero Sheet",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "askthar_valtoris_concept_sheet.png",
-      "full": "d587545e70.webp",
-      "thumb": "d587545e70-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1530,17 +1170,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "834e86261e",
-      "title": "Faun Token",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "token_1.png",
-      "full": "834e86261e.webp",
-      "thumb": "834e86261e-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "05435be0bf",
       "title": "Fog God Door cast",
       "cat": "hero",
@@ -1574,17 +1203,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "b958ee3d35",
-      "title": "Grizzled Warrior",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "e6e3f7e4-08c3-4d82-8ff8-d3d529860ab4.png",
-      "full": "b958ee3d35.webp",
-      "thumb": "b958ee3d35-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "5722ce616a",
       "title": "Hero Party",
       "cat": "hero",
@@ -1593,17 +1211,6 @@
       "src": "image (16).jpg",
       "full": "5722ce616a.webp",
       "thumb": "5722ce616a-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "902226ff9c",
-      "title": "Horned Warrior",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "content.png",
-      "full": "902226ff9c.webp",
-      "thumb": "902226ff9c-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1633,17 +1240,6 @@
       "src": "kingdome-of-hearts-original-card-uhd-sharp.png",
       "full": "14bfd6d6b8.webp",
       "thumb": "14bfd6d6b8-t.webp"
-    },
-    {
-      "id": "828c47dc48",
-      "title": "Lantern (mascot)",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "5cead0b3-d2f9-48a5-8658-01f51bb34849.png",
-      "full": "828c47dc48.webp",
-      "thumb": "828c47dc48-t.webp",
-      "titled_by": "vision"
     },
     {
       "id": "ca58f592ba",
@@ -1690,28 +1286,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "353c175d08",
-      "title": "Mountain Warrior",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "f7914dc6-654a-49b4-a79e-dc6f10fefd5a.png",
-      "full": "353c175d08.webp",
-      "thumb": "353c175d08-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "90f1bc8cea",
-      "title": "My Dark Dream card",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "ChatGPT Image Jun 2, 2026, 04_12_00 AM.png",
-      "full": "90f1bc8cea.webp",
-      "thumb": "90f1bc8cea-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "c2ca448d93",
       "title": "Neon Blinkbug",
       "cat": "hero",
@@ -1720,17 +1294,6 @@
       "src": "image.png",
       "full": "c2ca448d93.webp",
       "thumb": "c2ca448d93-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "debbd49b05",
-      "title": "Neon Portal Crew",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "image (4).jpg",
-      "full": "debbd49b05.webp",
-      "thumb": "debbd49b05-t.webp",
       "titled_by": "vision"
     },
     {
@@ -1936,23 +1499,6 @@
       "thumb": "1179ffa15c-t.webp"
     },
     {
-      "id": "5a71511a76",
-      "title": "The Fool and Fein Hero Pose Wide Metal",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [
-        "fein",
-        "fool",
-        "hero",
-        "metal",
-        "pose",
-        "wide"
-      ],
-      "src": "the-fool-and-fein-hero-pose-wide-metal.png",
-      "full": "5a71511a76.webp",
-      "thumb": "5a71511a76-t.webp"
-    },
-    {
       "id": "9bf12f2e1c",
       "title": "The Fool and Fein Lore Accurate UHD",
       "cat": "hero",
@@ -1998,32 +1544,6 @@
       "src": "the-fool-masked-trickster-horns.png",
       "full": "99de1528af.webp",
       "thumb": "99de1528af-t.webp"
-    },
-    {
-      "id": "7d70ddbc64",
-      "title": "The Fool Regal Virtuoso Token v6",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [
-        "fool",
-        "regal",
-        "token",
-        "virtuoso"
-      ],
-      "src": "the-fool-regal-virtuoso-token-v6.png",
-      "full": "7d70ddbc64.webp",
-      "thumb": "7d70ddbc64-t.webp"
-    },
-    {
-      "id": "5129694f4d",
-      "title": "The Forgemaster",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "f9825e97-f37b-4455-a477-ca3c3c0f9bbb.png",
-      "full": "5129694f4d.webp",
-      "thumb": "5129694f4d-t.webp",
-      "titled_by": "vision"
     },
     {
       "id": "3de10351cc",
@@ -2107,38 +1627,6 @@
       "thumb": "70bd237a68-t.webp"
     },
     {
-      "id": "912cc6e9a6",
-      "title": "Valtoris Fein Convergence Graphic Memorystrand",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [
-        "convergence",
-        "fein",
-        "graphic",
-        "memorystrand",
-        "valtoris"
-      ],
-      "src": "valtoris-fein-convergence-graphic-memorystrand.png",
-      "full": "912cc6e9a6.webp",
-      "thumb": "912cc6e9a6-t.webp"
-    },
-    {
-      "id": "49e4ef188b",
-      "title": "Valtoris Fein Convergence Token Clean",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [
-        "clean",
-        "convergence",
-        "fein",
-        "token",
-        "valtoris"
-      ],
-      "src": "valtoris-fein-convergence-token-clean.png",
-      "full": "49e4ef188b.webp",
-      "thumb": "49e4ef188b-t.webp"
-    },
-    {
       "id": "9b12c08ce0",
       "title": "Valtoris Fein Faceless Mask Gear Sheet",
       "cat": "hero",
@@ -2190,17 +1678,6 @@
       "thumb": "a04553d1d7-t.webp"
     },
     {
-      "id": "81488d73da",
-      "title": "Warrior Token",
-      "cat": "hero",
-      "status": "auto",
-      "tags": [],
-      "src": "token_2.png",
-      "full": "81488d73da.webp",
-      "thumb": "81488d73da-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "ccbe0b84a4",
       "title": "Wedding at Convergence sci-fi Mermaid Fairy Fool",
       "cat": "hero",
@@ -2239,28 +1716,6 @@
       "src": "image (9).jpg",
       "full": "fcd7b1eb98.webp",
       "thumb": "fcd7b1eb98-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "89ab41e07d",
-      "title": "16 Doors board",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "ChatGPT Image Jun 2, 2026, 02_09_33 AM.png",
-      "full": "89ab41e07d.webp",
-      "thumb": "89ab41e07d-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "df58212c11",
-      "title": "24 Canvas grid",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "8ebc034a-35dc-4e8c-b039-4df639e6af59.png",
-      "full": "df58212c11.webp",
-      "thumb": "df58212c11-t.webp",
       "titled_by": "vision"
     },
     {
@@ -2341,17 +1796,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "b4045f8bd1",
-      "title": "Doors card",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "60c8dfce-09ac-4afa-a81b-ba70786b3b4a.png",
-      "full": "b4045f8bd1.webp",
-      "thumb": "b4045f8bd1-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "33673494dc",
       "title": "Doors Storybook",
       "cat": "world",
@@ -2360,72 +1804,6 @@
       "src": "782be84d-829b-476e-9c9b-af605900476c.png",
       "full": "33673494dc.webp",
       "thumb": "33673494dc-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "9a02486c52",
-      "title": "Dream Journal 1.0",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "image (2).jpg",
-      "full": "9a02486c52.webp",
-      "thumb": "9a02486c52-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "c195411796",
-      "title": "Dream Journal board",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "aa9edf15-9bf7-4673-941e-3666d86ecea3 (1).png",
-      "full": "c195411796.webp",
-      "thumb": "c195411796-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "66ada902a7",
-      "title": "Dream Journal card",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "48c28a09-3fd4-44ba-b128-c58b5f9f40d3.png",
-      "full": "66ada902a7.webp",
-      "thumb": "66ada902a7-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "fe517a0a9f",
-      "title": "Dream Journal card II",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "e442d23d-ed14-4ddd-a7bd-7858a5c70647.png",
-      "full": "fe517a0a9f.webp",
-      "thumb": "fe517a0a9f-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "62a0a2b178",
-      "title": "Dream Journal emblem",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "ChatGPT Image Jun 1, 2026, 11_06_59 PM.png",
-      "full": "62a0a2b178.webp",
-      "thumb": "62a0a2b178-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "4a1ad1782f",
-      "title": "Dream Journal emblem II",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "ChatGPT_Image_Jun_1_2026_11_12_28_PM.png",
-      "full": "4a1ad1782f.webp",
-      "thumb": "4a1ad1782f-t.webp",
       "titled_by": "vision"
     },
     {
@@ -2462,17 +1840,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "780b381c84",
-      "title": "Garden Cafe Couple",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "badada2c-7675-4682-b378-9e25d8ff0a32.png",
-      "full": "780b381c84.webp",
-      "thumb": "780b381c84-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "ec8d9e9235",
       "title": "Gothic Bridge Night",
       "cat": "world",
@@ -2492,28 +1859,6 @@
       "src": "7389278a-d41d-47af-ad19-90908b45bad5.png",
       "full": "21f4f8405e.webp",
       "thumb": "21f4f8405e-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "fe1f9db2e0",
-      "title": "Green Lore card",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "170d082d-4550-4017-a2c7-3be22dd3c4d7.png",
-      "full": "fe1f9db2e0.webp",
-      "thumb": "fe1f9db2e0-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "c93b224d23",
-      "title": "Grotto Library",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "d20270f7-10b1-467e-abfd-610fe0db1e7c.png",
-      "full": "c93b224d23.webp",
-      "thumb": "c93b224d23-t.webp",
       "titled_by": "vision"
     },
     {
@@ -2539,17 +1884,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "13020fb410",
-      "title": "Lantern Cube Sigil",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "fa70b4a2-f5d8-47ca-b983-66c4681ac287.png",
-      "full": "13020fb410.webp",
-      "thumb": "13020fb410-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "9229338f36",
       "title": "Lantern OS Agent Fleet Blackhole Core 04",
       "cat": "world",
@@ -2564,17 +1898,6 @@
       "src": "lantern-os-agent-fleet-blackhole-core-04.png",
       "full": "9229338f36.webp",
       "thumb": "9229338f36-t.webp"
-    },
-    {
-      "id": "e6fac7a034",
-      "title": "Lantern OS Dream board",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "2200d505-aa6e-4605-8167-a131c319c2a6.png",
-      "full": "e6fac7a034.webp",
-      "thumb": "e6fac7a034-t.webp",
-      "titled_by": "vision"
     },
     {
       "id": "ad42cf8ea3",
@@ -2639,24 +1962,6 @@
       "thumb": "c69fa94289-t.webp"
     },
     {
-      "id": "4e8c126781",
-      "title": "LANTERN OS SPANISH ABODE FOUNDER ROUTE CONCEPT SHEET 2026 05 28",
-      "cat": "world",
-      "status": "auto",
-      "tags": [
-        "abode",
-        "concept",
-        "founder",
-        "lantern",
-        "route",
-        "sheet",
-        "spanish"
-      ],
-      "src": "LANTERN-OS-SPANISH-ABODE-FOUNDER-ROUTE-CONCEPT-SHEET-2026-05-28.png",
-      "full": "4e8c126781.webp",
-      "thumb": "4e8c126781-t.webp"
-    },
-    {
       "id": "515875a27c",
       "title": "Lantern OS Superjarvis Command Chamber 02",
       "cat": "world",
@@ -2695,45 +2000,6 @@
       "thumb": "6b71d59fae-t.webp"
     },
     {
-      "id": "2495c961a5",
-      "title": "Mandala Dark",
-      "cat": "world",
-      "status": "auto",
-      "tags": [
-        "dark",
-        "mandala"
-      ],
-      "src": "mandala-dark.png",
-      "full": "2495c961a5.webp",
-      "thumb": "2495c961a5-t.webp"
-    },
-    {
-      "id": "71234d7cf6",
-      "title": "Mandala Transparent",
-      "cat": "world",
-      "status": "auto",
-      "tags": [
-        "mandala",
-        "transparent"
-      ],
-      "src": "mandala-transparent.png",
-      "full": "71234d7cf6.webp",
-      "thumb": "71234d7cf6-t.webp"
-    },
-    {
-      "id": "6fe2f3252b",
-      "title": "Mandala White",
-      "cat": "world",
-      "status": "auto",
-      "tags": [
-        "mandala",
-        "white"
-      ],
-      "src": "mandala-white.png",
-      "full": "6fe2f3252b.webp",
-      "thumb": "6fe2f3252b-t.webp"
-    },
-    {
       "id": "af9ef79eb1",
       "title": "March of Ruins",
       "cat": "world",
@@ -2764,17 +2030,6 @@
       "src": "7d2a8c65-3b37-4bb4-9ce9-d7c557d1d779.png",
       "full": "13881d4a84.webp",
       "thumb": "13881d4a84-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "da3469ff5d",
-      "title": "Orrery Medallion",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "a5ccd5ad-7422-4430-88f4-64f91613d39a.png",
-      "full": "da3469ff5d.webp",
-      "thumb": "da3469ff5d-t.webp",
       "titled_by": "vision"
     },
     {
@@ -2811,17 +2066,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "585535caab",
-      "title": "Runestream",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "3a0d6abc-8d28-467d-af49-a0e8560897f6.png",
-      "full": "585535caab.webp",
-      "thumb": "585535caab-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "f5899d340d",
       "title": "Sphinx Ruins",
       "cat": "world",
@@ -2833,17 +2077,6 @@
       "titled_by": "vision"
     },
     {
-      "id": "b2df171252",
-      "title": "Staff of the City card",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "Staff_of_the_City_card.png",
-      "full": "b2df171252.webp",
-      "thumb": "b2df171252-t.webp",
-      "titled_by": "vision"
-    },
-    {
       "id": "71eb4513be",
       "title": "Sunset Pilgrim",
       "cat": "world",
@@ -2852,17 +2085,6 @@
       "src": "bfbe4ebf-fb5a-4955-960e-58bfa7cc8279.png",
       "full": "71eb4513be.webp",
       "thumb": "71eb4513be-t.webp",
-      "titled_by": "vision"
-    },
-    {
-      "id": "638abf6e23",
-      "title": "Sunset Van",
-      "cat": "world",
-      "status": "auto",
-      "tags": [],
-      "src": "7e35e07a-3180-4c25-868a-e17f00c864a0.png",
-      "full": "638abf6e23.webp",
-      "thumb": "638abf6e23-t.webp",
       "titled_by": "vision"
     },
     {
