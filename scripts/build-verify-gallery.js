@@ -28,6 +28,7 @@ const FOLDERS = [
   ["sigil-city", "6 · Sigil, City of Doors — synthesis: galleries, markets, boards, the museum of the game"],
   ["fog-door-return", "7 · Fog Door Return — the way back: mist, wastes, dark tests, homecoming"],
   ["reference", "✎ Cast canon — Alex's hand-drawn references (outside the timeline)"],
+  ["_removed", "🗑 Removed from the timeline — excluded from exports; use a tile's dropdown (or drag it) to restore"],
 ];
 
 const ITEMS = {};
@@ -36,7 +37,7 @@ for (const it of m.items) ITEMS[it.id] = { title: it.title || "", thumb: it.thum
 const DATA = {
   base: m.base,
   folders: FOLDERS,
-  timeline: Object.fromEntries(FOLDERS.map(([k]) => [k, timeline[k] || []])),
+  timeline: Object.fromEntries(FOLDERS.map(([k]) => [k, timeline[k] || []])),  // _removed starts empty
   items: ITEMS,
   badges: { ...heroOf, ...doorOf },
 };
@@ -62,10 +63,13 @@ h2 .count{color:#66607a;font-size:13px}
 #bar .stat{color:#9a93a8;flex:1}
 #bar button{background:#ffd27f;color:#201a08;border:0;border-radius:5px;padding:7px 14px;font:600 13px monospace;cursor:pointer}
 #bar button.ghost{background:transparent;color:#9a93a8;border:1px solid #3a3745}
+.c select.mv{width:100%;margin-top:3px;background:#0f0e14;color:#9a93a8;border:1px solid #2c2a33;border-radius:3px;font:10px monospace;padding:2px}
+.c select.mv:hover{color:#e8e2d8;border-color:#4a4658}
 </style>
 <h1>Three Doors — art timeline curator</h1>
 <p class=intro>Every CDN image, hand-sorted into the seven canonical door folders (the timeline).
-<b>Drag</b> a tile to reorder within a folder or move it to another era. <b>Click a title</b> to rename it.
+<b>Drag</b> a tile to reorder within a folder or move it to another era — or use the tile's
+<b>dropdown</b> to send it straight to a folder or remove it from the timeline. <b>Click a title</b> to rename it.
 ★-outlined tiles are the chosen scene-hero / door-card art. Order within a folder is the preference
 order the game uses when drawing loop art. Changes autosave in this browser; <b>Export</b> downloads
 the updated <code>art-timeline.json</code> + <code>manifest.json</code> to commit.</p>
@@ -100,8 +104,9 @@ let moves = 0;
 function persist() {
   localStorage.setItem(LS_KEY, JSON.stringify(state));
   const retitles = Object.keys(state.titles).length;
-  document.getElementById("stat").textContent = (moves || retitles)
-    ? moves + " move(s) this session · " + retitles + " retitle(s) — autosaved locally, Export to commit"
+  const removed = (state.timeline._removed || []).length;
+  document.getElementById("stat").textContent = (moves || retitles || removed)
+    ? moves + " move(s) this session · " + retitles + " retitle(s) · " + removed + " removed — autosaved locally, Export to commit"
     : "no local changes";
 }
 
@@ -122,15 +127,39 @@ function render() {
       const c = document.createElement("div");
       c.className = "c" + (DATA.badges[id] ? " pick" : "");
       c.draggable = true; c.dataset.id = id;
+      let sel = '<select class=mv title="Move to folder">';
+      for (const [fk, fl] of DATA.folders) {
+        if (fk === "_removed") continue;
+        sel += '<option value="' + fk + '"' + (fk === key ? " selected" : "") + ">" + fl.split(" — ")[0].replace(/<[^>]+>/g, "") + "</option>";
+      }
+      sel += '<option value="_removed"' + (key === "_removed" ? " selected" : "") + '>✕ remove from timeline</option></select>';
       c.innerHTML = (DATA.badges[id] ? '<div class=badge>★ ' + DATA.badges[id] + "</div>" : "")
         + '<img loading=lazy src="' + DATA.base + it.thumb + '">'
         + '<div class="t' + (state.titles[id] != null ? " edited" : "") + '" contenteditable spellcheck=false>' + titleOf(id).replace(/</g, "&lt;") + "</div>"
-        + '<div class=i>' + id + "</div>";
+        + '<div class=i>' + id + "</div>" + sel;
       g.appendChild(c);
     }
     root.appendChild(g);
   }
 }
+
+function moveTo(id, to, beforeId) {
+  const from = Object.keys(state.timeline).find((k) => state.timeline[k].includes(id));
+  if (!from || (from === to && !beforeId)) return;
+  state.timeline[from] = state.timeline[from].filter((x) => x !== id);
+  if (beforeId && state.timeline[to].includes(beforeId)) {
+    state.timeline[to].splice(state.timeline[to].indexOf(beforeId), 0, id);
+  } else {
+    state.timeline[to].push(id);
+  }
+  moves++;
+  persist(); render();
+}
+root.addEventListener("change", (e) => {
+  const sel = e.target.closest("select.mv");
+  if (!sel) return;
+  moveTo(sel.closest(".c").dataset.id, sel.value);
+});
 
 // ── drag & drop ──
 let dragId = null;
@@ -186,19 +215,10 @@ root.addEventListener("drop", (e) => {
   const tile = e.target.closest(".c");
   const grid = e.target.closest(".g");
   if (!grid) return;
-  const from = Object.keys(state.timeline).find((k) => state.timeline[k].includes(dragId));
   const to = grid.dataset.folder;
-  if (!from || !to) return;
+  if (!to) return;
   _dragClientY = null;
-  state.timeline[from] = state.timeline[from].filter((x) => x !== dragId);
-  if (tile && tile.dataset.id !== dragId) {
-    const arr = state.timeline[to];
-    arr.splice(arr.indexOf(tile.dataset.id), 0, dragId);
-  } else {
-    state.timeline[to].push(dragId);
-  }
-  moves++;
-  persist(); render();
+  moveTo(dragId, to, tile && tile.dataset.id !== dragId ? tile.dataset.id : null);
 });
 
 // ── editable titles (commit live on input; focusout just re-normalizes) ──
@@ -230,12 +250,15 @@ function download(name, obj) {
   a.click();
 }
 document.getElementById("exportTimeline").onclick = () => {
+  const out = {};
+  for (const [k, ids] of Object.entries(state.timeline)) if (k !== "_removed") out[k] = ids;
   download("art-timeline.json", Object.assign(
     { _comment: "Every KOH CDN image hand-sorted into one of the 7 canonical door folders (the timeline). Order within a folder = curated preference order for loop art. Exported from art-verify.html." },
-    state.timeline));
+    out));
 };
 document.getElementById("exportManifest").onclick = () => {
-  const items = MANIFEST_ITEMS.map((it) => state.titles[it.id] != null
+  const gone = new Set(state.timeline._removed || []);
+  const items = MANIFEST_ITEMS.filter((it) => !gone.has(it.id)).map((it) => state.titles[it.id] != null
     ? Object.assign({}, it, { title: state.titles[it.id], titled_by: "curator" })
     : it);
   download("manifest.json", { base: DATA.base, items });
