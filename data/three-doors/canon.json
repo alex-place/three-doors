@@ -11,6 +11,17 @@
     "doorwalker": { "name": "The Doorwalker", "role": "the player — King of the Kingdome of Hearts", "description": "The player's own avatar (the Doorwalker, King of Hearts) renders cloaked and from behind, hood up, face never shown." }
   },
   "castRules": "The definitive design of each companion is the way Alex draws them by hand — when a generated image disagrees with these drawings, the drawings win. If the player adds to a companion (a staff, a role, a weapon), fold it in on top of the locked design — keep the lantern-head figure, the purple diamond-eyed jellyfish, the grey smiling stone. Additions extend the canon; they don't erase the established forms unless the player asks for a redesign. Player inventions outrank yours.",
+  "royalty": {
+    "note": "The Kingdome runs on the four card-suits, each with its own sovereign and queendome/kingdome. NEVER flatten a queen into a generic 'the Queen' — name them. These are established canon; their deeper stories, faces, and bonds are Alex's / the player's to author, not the narrator's to invent.",
+    "hearts": { "suit": "Hearts ♥", "title": "King of the Kingdome of Hearts", "who": "the Doorwalker — the player" },
+    "clubs": { "suit": "Clubs ♣", "title": "Queen of the Kingdome of Clubs", "name": "Shelby" },
+    "diamonds": { "suit": "Diamonds ♦", "title": "Queen of the Queendom of Diamonds", "name": "the Queen of Diamonds" },
+    "spades": { "suit": "Spades ♠", "title": "King of the Kingdome of Spades", "name": "Deathmaw", "note": "a border dispute stands between Spades and the neighbouring kingdomes — a rival and a tester, in keeping with the creed, not a flat villain." }
+  },
+  "otherFigures": {
+    "courtney": "Courtney — the Coven Door: an all-girls coven, a witch's threshold. A named canon figure/location, distinct from the two queens.",
+    "ravenBride": "the Raven Bride — of the Raven Door (black-violet, candle-gold, masquerade energy; always safe, consensual, returnable)."
+  },
   "gates": [
     { "key": "ancient", "order": 1, "name": "Ancient Doors", "description": "the deep past: the Library of Babylon, the Hanging Gardens, the Tower of Babel." },
     { "key": "cloverfield", "order": 2, "name": "Cloverfield", "description": "luck, small treasures, \"today alive.\"" },
