@@ -228,6 +228,47 @@ async function keeperSpeak(payload) {
   };
 }
 
+// ── Three Doors freeform narration ──────────────────────────────────────────
+// The game the player actually plays: warm, dreamlike, image-forward. One vivid
+// beat per turn, the cast in their locked forms, no convergence jargon. The
+// scene graph routes; the model paints the beat in words.
+const THREE_DOORS_SYSTEM = `You are the voice of THREE DOORS — the Kingdome of Hearts, a warm, dreamlike, image-forward narrative game. The player is the Doorwalker, King of the Kingdome of Hearts, with Joy the small grey elephant in their arms.
+
+WHAT THIS IS: play, not product. Never explain systems, code, convergence, Σ₀, or "loops/records/stages" — this is a dream and an art object. Warm even when moody; melancholy-wonder, grown-up, fine-art — never bright-cute, never clinical, never sycophantic.
+
+THE CAST (draw them the same every time; never a fox):
+- Lantern — the guide: a figure whose HEAD is a lantern (glass body, warm orange flame), red cap, purple coat, white gloves, black boots. Warm, steady; its rare line is "You came back."
+- Eclipse — a purple jellyfish: rounded magenta bell, two blue diamond eyes, pale cloud collar, purple tentacles, floating. Wonder and the gentle dark.
+- Keystone — a grey cracked stone/boulder with two oval eyes and a broad small-toothed smile. Steady, brave, unbreakable; quieter and more soulful in solemn scenes.
+- Blinkbug — a small bug with a boxy TV/monitor head (a smiling pixel face), leaf-tipped antennae, a segmented spare-parts body. Lantern built him.
+- Joy — a small grey elephant the Doorwalker carries. Odin — the Fog God, a grey wolf-warrior in blue-silver armour with a rune axe; a guardian-tester at the fog gate, never a villain.
+
+THE CREED (the rules of the world; echo it only at big moments): here love is the law; the key is a blade carried to guard the fragile and break the cruel, never to force; death is only imaginary — we fall, we rise, we try again; forever begins with "let's play." The Doorwalker has two faces — one to feel, one to understand.
+
+THE PLAYER AUTHORS CANON: whatever they type or name is their invention and outranks yours — fold it in and carry it forward. Never reset the world unless they say "start over." Keep continuity with what came before.
+
+YOUR TURN: given the current scene, the door just chosen, and what the player said, tell ONE vivid, concise beat (2-5 sentences, present tense, sensory) that opens that door and moves the dream forward. Name a companion's small reaction when it fits. Do NOT list the next doors (the game shows those). Output ONLY the beat prose — no headers, no meta, no stage directions.`;
+
+async function narrateScene(payload) {
+  const p = payload || {};
+  const canon = (p.canon || []).slice(-8);
+  const user = [
+    `Scene: ${p.sceneKey || "the Kingdome"}${p.theme ? " — " + p.theme : ""}.`,
+    p.sceneText ? "The place: " + String(p.sceneText).replace(/\*/g, "").slice(0, 400) : "",
+    p.imageDesc ? `The painting for this beat shows: ${String(p.imageDesc).slice(0, 400)} — ground your beat in what the picture shows.` : "",
+    p.choice ? `The Doorwalker just chose: ${p.choice}.` : "The Doorwalker arrives.",
+    p.playerWords ? `They said: "${String(p.playerWords).slice(0, 200)}"` : "",
+    canon.length ? "Canon they've authored (honor it): " + canon.join("; ") : "",
+    p.lesson ? `(This door is quietly about: ${p.lesson} — never grade them; let it breathe.)` : "",
+  ].filter(Boolean).join("\n");
+  const text = await vertexCall({
+    systemInstruction: { parts: [{ text: THREE_DOORS_SYSTEM }] },
+    contents: [{ role: "user", parts: [{ text: user }] }],
+    generationConfig: { temperature: 0.9, maxOutputTokens: 400, thinkingConfig: { thinkingBudget: 0 } },
+  });
+  return String(text || "").trim();
+}
+
 // ── plumbing ──
 function sendJson(res, code, obj) {
   res.writeHead(code, { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" });
@@ -276,6 +317,48 @@ const server = http.createServer(async (req, res) => {
     });
     return;
   }
+  // liveness — the game gates generated narration on this
+  if (url.pathname === "/api/health") return sendJson(res, 200, { ok: true, narration: !!PROJECT, model: MODEL });
+
+  // generated beat text for the freeform game (the cast + creed + grown-up tone)
+  if (url.pathname === "/api/scene/narrate" && req.method === "POST") {
+    if (!PROJECT) return sendJson(res, 503, { error: "vertex_not_configured" });
+    let body = "";
+    req.on("data", (d) => { body += d; if (body.length > 32_000) req.destroy(); });
+    req.on("end", async () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        let reply;
+        try { reply = await narrateScene(payload); }
+        catch (_first) { reply = await narrateScene(payload); }
+        sendJson(res, 200, { ok: true, reply, via: "vertex" });
+      } catch (e) { sendJson(res, 502, { error: String(e.message || e).slice(0, 200) }); }
+    });
+    return;
+  }
+
+  // replace a scene's image with the player's own render (saved, so it persists)
+  if (url.pathname === "/api/scene/image" && req.method === "POST") {
+    let body = "";
+    req.on("data", (d) => { body += d; if (body.length > 12_000_000) req.destroy(); });  // ~12MB cap
+    req.on("end", () => {
+      try {
+        const { dataUrl } = JSON.parse(body || "{}");
+        const m = /^data:image\/(png|jpeg|jpg|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(dataUrl || ""));
+        if (!m) return sendJson(res, 400, { error: "expected a png/jpeg/webp data URL" });
+        const ext = m[1] === "jpeg" ? "jpg" : m[1];
+        const dir = path.join(ROOT, "uploads");
+        fs.mkdirSync(dir, { recursive: true });
+        // deterministic-ish name from content length + a counter file — no Date.now (kept simple)
+        const buf = Buffer.from(m[2], "base64");
+        const name = "koh-" + require("crypto").createHash("sha1").update(buf).digest("hex").slice(0, 16) + "." + ext;
+        fs.writeFileSync(path.join(dir, name), buf);
+        sendJson(res, 200, { ok: true, url: "/uploads/" + name });
+      } catch (e) { sendJson(res, 502, { error: String(e.message || e).slice(0, 200) }); }
+    });
+    return;
+  }
+
   // curated art data (lives beside the code in data/three-doors/, not public/)
   if (url.pathname === "/data/art-timeline.json" || url.pathname === "/data/door-art-picks.json" || url.pathname === "/data/keepers.json") {
     const f = path.join(__dirname, "data", "three-doors", path.basename(url.pathname));
@@ -285,7 +368,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
   // static
-  let p = path.join(ROOT, decodeURIComponent(url.pathname === "/" ? "/index.html" : url.pathname));
+  let p = path.join(ROOT, decodeURIComponent(url.pathname === "/" ? "/game.html" : url.pathname));
   if (!p.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
   if (!fs.existsSync(p) || !fs.statSync(p).isFile()) { res.writeHead(404); return res.end("not found"); }
   res.writeHead(200, { "Content-Type": TYPES[path.extname(p)] || "application/octet-stream" });

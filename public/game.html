@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#140507">
+  <meta property="og:title" content="Three Doors — Kingdome of Hearts">
+  <meta property="og:description" content="A warm, dreamlike, image-forward dream game. Three doors each scene — no wrong choices.">
+  <meta property="og:type" content="website">
+  <title>Three Doors — Kingdome of Hearts</title>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/three-doors-crt.css?v=20260717-standalone">
+  <style>
+    /* the scene picture + its "replace with your own render" affordance */
+    .scene-image { position: relative; }
+    .img-replace {
+      position: absolute; right: 8px; bottom: 8px;
+      font: 600 11px/1 monospace; letter-spacing: .06em;
+      padding: 5px 10px; border-radius: 8px; cursor: pointer;
+      color: var(--text); background: color-mix(in oklab, var(--bg) 70%, transparent);
+      border: 1px solid var(--border); backdrop-filter: blur(4px);
+      opacity: 0; transition: opacity .18s;
+    }
+    .scene-image:hover .img-replace, .img-replace:focus-visible { opacity: 1; }
+    .img-replace:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-brand" href="/game.html">
+    <span>Three Doors</span>
+  </a>
+  <div class="nav-actions">
+    <button onclick="resetGame()" class="crt-badge" title="New game" aria-label="Start a new game">↺ New</button>
+    <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode" aria-label="Toggle light or dark mode" style="background:none;border:none;cursor:pointer;font-size:16px">🌙</button>
+  </div>
+</nav>
+
+<main class="crt-frame">
+
+  <div class="doors-header">
+    <span class="crt-kicker">▚ Kingdome of Hearts</span>
+    <span id="status-line" class="crt-kicker muted" aria-live="polite"></span>
+  </div>
+
+  <!-- Optional gate track — stays hidden unless a scene sets a stage index. -->
+  <div id="stage-breadcrumb" class="gate-track" style="display:none">
+    <span id="stage-loop-badge" class="gate-track-loop">Loop 1</span>
+    <div id="stage-crumbs" class="gate-track-steps"></div>
+  </div>
+
+  <div id="chat">
+    <section class="welcome-doors" id="welcome">
+      <h1>Kingdome of Hearts</h1>
+      <svg class="threshold-motif" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="threshold-core" cx="50%" cy="88%" r="55%">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.85"/>
+            <stop offset="55%" stop-color="var(--accent)" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="arch-glow" cx="200" cy="264" rx="90" ry="34" fill="url(#threshold-core)"/>
+        <path class="arch-ring" style="--ring-op:0.22" d="M40,300 V150 A160,160 0 0 1 360,150 V300" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+        <path class="arch-ring" style="--ring-op:0.32" d="M78,300 V158 A122,122 0 0 1 322,158 V300" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+        <path class="arch-ring" style="--ring-op:0.45;stroke:var(--accent)" d="M116,300 V166 A84,84 0 0 1 284,166 V300" fill="none" stroke-width="1.5"/>
+        <path class="arch-ring" style="--ring-op:0.65;stroke:var(--accent)" d="M154,300 V174 A46,46 0 0 1 246,174 V300" fill="none" stroke-width="1.75"/>
+      </svg>
+      <p class="landing-premise" style="text-align:center">A warm, dreamlike door-game. Every scene paints one picture and opens three doors — or name your own. No wrong choices; the world remembers where you've been.</p>
+      <div class="cast-strip" aria-label="The companions, as Alex draws them">
+        <img class="cast-card" src="/assets/content/koh/reference-lantern-t.webp" alt="Lantern" loading="lazy" onerror="this.style.display='none'">
+        <img class="cast-card" src="/assets/content/koh/reference-eclipse-t.webp" alt="Eclipse" loading="lazy" onerror="this.style.display='none'">
+        <img class="cast-card" src="/assets/content/koh/reference-keystone-t.webp" alt="Keystone" loading="lazy" onerror="this.style.display='none'">
+        <img class="cast-card" src="/assets/content/koh/reference-blinkbug-t.webp" alt="Blinkbug" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <button class="start-btn" onclick="startGame()">Enter the Kingdome</button>
+    </section>
+  </div>
+
+  <div id="choice-bar" style="display:none">
+    <div id="door-quick-picks"></div>
+    <div class="console-row">
+      <input id="custom-door-input" class="console-input" type="text"
+        placeholder="a door of your own, or just talk to Lantern…"
+        onkeydown="if(event.key==='Enter')submitCustomDoor()" />
+      <button class="console-submit" onclick="submitCustomDoor()">Open</button>
+    </div>
+    <div class="console-meta">
+      <span class="console-label" style="margin:0">Name your own door — the Kingdome will open it</span>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span><strong>Three Doors</strong> · the Kingdome of Hearts · <em>forever begins with “let’s play.”</em></span>
+  </div>
+</footer>
+
+<script>
+  // Minimal theme toggle (replaces the site-wide /js/theme-toggle.js).
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("three-doors-theme"); } catch (e) {}
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+    window.toggleTheme = function () {
+      var cur = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+      var next = cur === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("three-doors-theme", next); } catch (e) {}
+      var b = document.getElementById("theme-toggle"); if (b) b.textContent = next === "light" ? "☀️" : "🌙";
+    };
+  })();
+</script>
+<script src="js/three-doors-data.js?v=20260717"></script>
+<script src="js/three-doors-game.js?v=20260717"></script>
+<script src="js/three-doors-render.js?v=20260717"></script>
+<script src="js/three-doors-images.js?v=20260717"></script>
+<script src="js/three-doors-lantern.js?v=20260717"></script>
+<script>
+  window.addEventListener('load', () => {
+    document.body.classList.add('game-started');
+    if (typeof startGame === 'function') startGame();
+  });
+</script>
+</body>
+</html>

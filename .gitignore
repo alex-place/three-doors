@@ -19,3 +19,7 @@ data/images/
 Thumbs.db
 .DS_Store
 node_modules
+
+# player-uploaded scene renders (replace-image) — not source
+public/uploads/*
+!public/uploads/.gitkeep
