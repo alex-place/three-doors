@@ -399,6 +399,7 @@ const NEXT_MAP = {
 };
 
 const SD_PROMPTS = {
+  "castle-balcony":"the King of the Kingdome of Hearts seen from behind at a stone balcony rail at night above a wide dark sea, cradling Joy the small grey elephant, crowned with tangled vines and soft old light, deep wine-purple royal cloak, a glowing heart-shaped key resting warm on the rail, Lantern the lantern-headed guide beside them with a steady warm flame, far doors glowing like lit windows across the water, lavender and drifting fireflies on the beach below, the first thin seam of dawn on the horizon, surreal atmospheric painterly muted grown-up melancholy-wonder, a fine-art picture not a cartoon, 16:9",
   "moss-entry":"atmospheric dreamscape, moss-covered ancient forest doorway, glowing green lanterns, lantern-headed guide with warm flame, rain on ferns, volumetric fog, dark fantasy, anime aesthetic, cel-shaded, 16:9",
   "burrow":"cozy underground burrow chamber, woven tree roots as walls, faded quilts, warm lantern glow, lantern-headed guide with dimmed flame, rain drumming on earth ceiling, dark fantasy, anime aesthetic, cel-shaded, 16:9",
   "sunken-bell":"submerged stone hallway, water at ankles, ancient bronze bell dripping, lantern reflections on wet ceiling, dark fantasy, anime aesthetic, cel-shaded, eerie but friendly, 16:9",
@@ -546,7 +547,7 @@ const CHARACTER_CANON =
   "the Kingdome companions in their exact canon: Lantern (a small standing figure whose head is a glass lantern with a warm orange flame burning inside, red beret with a little loop on top, purple coat, white gloves, black legs and boots), " +
   "Eclipse (a rounded magenta-purple jellyfish with two blue diamond-shaped eyes each holding a white sparkle, a pale lavender cloud-like collar, thick purple tentacles, floating, no feet), " +
   "Keystone (a grey cracked stone boulder-egg with two large oval eyes and a broad smile with two small square teeth, steady and brave); " +
-  "the Doorwalker, King of Hearts, seen only cloaked and from behind, hood up, face never shown; no fox";
+  "the Doorwalker IS the King of the Kingdome of Hearts — seen from behind, face never shown, in a deep wine-purple royal cloak, crowned with a crown of tangled living vines and soft old light, carrying a glowing heart-shaped key like a gentle blade, a small two-faced mask at the hip (one face to feel, one to understand); calm and unhurried; no fox";
 // Alex's art steer: surreal / atmospheric / grown-up, never bright-cute.
 const STYLE_CANON = "surreal, atmospheric, painterly, muted, grown-up, melancholy-wonder, a fine-art picture not a cartoon";
 // The skill's setting focal point, carried into every scene prompt.
