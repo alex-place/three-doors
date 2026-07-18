@@ -6,20 +6,18 @@
     "eclipse": { "name": "Eclipse", "role": "the night/dark partner", "description": "A purple jellyfish: a rounded magenta-purple bell with two blue diamond-shaped eyes (a white sparkle inside each), a pale lavender cloud-like collar beneath, and thick purple tentacles (a pair curling up at the sides, more hanging straight down); it floats, no feet. The night/dark partner by nature, never by menace." },
     "keystone": { "name": "Keystone", "role": "the tank", "description": "A grey stone/boulder, rounded egg/triangular shape, its surface run through with fine cracks; a face of two large oval eyes (white glint) and a broad smile with two small square teeth. Steady, brave, unbreakable. In grown-up / surreal scenes, draw him more soulfully — a smooth cracked stone egg, sometimes hooded or cloaked, gazing quietly over vast misty worlds. Same soul, a quieter face; the wide grin is his bright mood, not his only one." },
     "blinkbug": { "name": "Blinkbug", "role": "Lantern's creation", "description": "A small bug with a boxy TV/monitor for a head (tilted), a cute face on the screen (two eyes, a little smile), two antennae tipped with rounded leaves, and a segmented caterpillar body cobbled from salvaged spare parts. Lantern built him long ago, the first time Lantern went through the XP Door, so the guide would have someone to explore the world with — maker and made. (Alex hasn't fixed his colours yet — keep it soft and line-friendly.)" },
-    "joy": { "name": "Joy", "role": "the carried one", "description": "A small grey elephant the player carries, trunk lifted toward the light." },
-    "odin": { "name": "Odin", "role": "the Fog God", "description": "A grey wolf warrior, ice-blue eyes, ornate blue-and-silver plate armour, bushy tail, a great rune-etched axe. Lord of riddles, watcher of fates — a guardian-tester at the Garden's gate, not a villain." },
     "doorwalker": { "name": "The Doorwalker", "role": "the player — King of the Kingdome of Hearts", "description": "The player's own avatar (the Doorwalker, King of Hearts) renders cloaked and from behind, hood up, face never shown." }
   },
   "castRules": "The definitive design of each companion is the way Alex draws them by hand — when a generated image disagrees with these drawings, the drawings win. If the player adds to a companion (a staff, a role, a weapon), fold it in on top of the locked design — keep the lantern-head figure, the purple diamond-eyed jellyfish, the grey smiling stone. Additions extend the canon; they don't erase the established forms unless the player asks for a redesign. Player inventions outrank yours.",
   "royalty": {
-    "note": "The Kingdome runs on the four card-suits, each with its own sovereign and queendome/kingdome. NEVER flatten a queen into a generic 'the Queen' — name them. These are established canon; their deeper stories, faces, and bonds are Alex's / the player's to author, not the narrator's to invent.",
+    "note": "The Kingdome runs on the card-suits, each with its own sovereign. NEVER flatten a queen into a generic 'the Queen' — name them. These are established canon; their deeper stories, faces, and bonds are Alex's / the player's to author, not the narrator's to invent.",
     "hearts": { "suit": "Hearts ♥", "title": "King of the Kingdome of Hearts", "who": "the Doorwalker — the player" },
     "clubs": { "suit": "Clubs ♣", "title": "Queen of the Kingdome of Clubs", "name": "Shelby" },
-    "diamonds": { "suit": "Diamonds ♦", "title": "Queen of the Queendom of Diamonds", "name": "the Queen of Diamonds" },
-    "spades": { "suit": "Spades ♠", "title": "King of the Kingdome of Spades", "name": "Deathmaw", "note": "a border dispute stands between Spades and the neighbouring kingdomes — a rival and a tester, in keeping with the creed, not a flat villain." }
+    "diamonds": { "suit": "Diamonds ♦", "title": "Queen of the Queendom of Diamonds", "name": "Courtney" }
   },
-  "otherFigures": {
-    "courtney": "Courtney — the Coven Door: an all-girls coven, a witch's threshold. A named canon figure/location, distinct from the two queens.",
+  "sideCharacters": {
+    "joy": "Joy — a small grey elephant; a SIDE character of the Elephant Oasis, sometimes carried by the King. Not one of the core companions.",
+    "odin": "Odin — the Fog God, a grey wolf-warrior, lord of riddles; belongs to the Fog Door Return (the way-home gate) as its guardian-tester. Not a companion.",
     "ravenBride": "the Raven Bride — of the Raven Door (black-violet, candle-gold, masquerade energy; always safe, consensual, returnable)."
   },
   "gates": [
@@ -31,7 +29,22 @@
     { "key": "sigil", "order": 6, "name": "Sigil — City of Doors", "description": "keys, markets, bridges; every threshold made visible." },
     { "key": "fog-return", "order": 7, "name": "Fog Door Return", "description": "misty cliffs, trust, and the path home; Odin the Fog God keeps this gate, which opens back onto the Garden and closes the loop." }
   ],
-  "gatesRule": "The Kingdome has seven major doors. The long route threads them in order — Ancient → Cloverfield → Tomorrow → XP → Xenon → Sigil → Fog Return — then returns to the Garden. Every other door is a subset of exactly one major door (a minor door, a sub-child, a sub-sub-child, and on down): the world is a strict tree rooted at these seven, and any door's lineage always traces back to one of them.",
+  "gatesRule": "The Kingdome has SEVEN CORE DOORS — think of them as folders, or genres. The long route threads them in order — Ancient → Cloverfield → Tomorrow → XP → Xenon → Sigil → Fog Return — then returns to the Garden. Each core door holds an INFINITE but NON-OVERLAPPING number of sub-doors: every sub-door matches its core door's vibe and belongs to exactly one genre, never two. Sub-doors are generated to fit the folder they're in, not hardcoded. The only fixed thresholds are the way-in (the Moss Door → Burrow / Sunken Bell / Little Crown, with their sub-doors) and the hub (the vigil balcony and the Throne garden where the seven core doors stand). Everything else is authored in play, inside one of the seven genres.",
+  "entryDoors": {
+    "moss-entry": ["The Burrow Door", "The Sunken Bell Door", "The Little Crown Door"],
+    "burrow": ["The Root Door", "The Ember Door", "The Stream Door"],
+    "sunken-bell": ["The Deep Door", "The Echo Door", "The Surface Door"],
+    "little-crown": ["The Throne Door", "The Hollow Door", "The Star Door"]
+  },
+  "coreDoors": [
+    { "glyph": "🪨", "name": "Ancient Doors", "vibe": "History · evolution · religion" },
+    { "glyph": "🍀", "name": "The Cloverfield", "vibe": "Shinies · luck · today alive" },
+    { "glyph": "🔭", "name": "Tomorrow Door", "vibe": "The world that's coming · branching futures" },
+    { "glyph": "💾", "name": "The XP Door [GLITCHED]", "vibe": "Corrupted · nostalgic · liminal" },
+    { "glyph": "🪐", "name": "Xenon Starship", "vibe": "All planets · midway · converge" },
+    { "glyph": "🏙️", "name": "Sigil — City of Doors", "vibe": "Every door leads here · the meta-hub" },
+    { "glyph": "🌫️", "name": "Fog Door Return", "vibe": "The way back · the final test at the gate" }
+  ],
   "creed": "I am the King of the Kingdome of Hearts.\nHere, love is the law, and every living thing beats a verse of it true.\n\nFor all the birds who paint the morning with song, for all the bees who stitch the world with gold, for every small life that dares to bloom — I wear the crown.\n\nI carry a key as a blade, not to open by force, but to guard what is fragile, to break what is cruel, to lock away the trial that should not rule.\n\nBeyond the Garden's gate sleeps the Fog God, Odin — lord of riddles, watcher of fates. When we meet, it is not to destroy, but to play the oldest game: the dance of courage against the unknown.\n\nFor death is only imaginary in the Kingdome of Hearts. We fall, we rise, we laugh, we try again — forever begins with \"let's play.\"\n\nI have two faces so I may see with both eyes: one to feel, one to understand. Together they rule with kindness and fire.\n\nI fight for love. I fight for wonder. I fight so every heart can be free, so every wing can fly, so every flower can open, so every dreamer can dream.\n\nI am the King of the Kingdome of Hearts. I fight for the love of all the birds and the bees.",
   "creedRules": [
     "The key is a blade — carried to guard the fragile and break the cruel, never to force. (The heart-key forged into the dark-key sword is exactly this.)",

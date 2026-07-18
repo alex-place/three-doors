@@ -126,37 +126,6 @@
       ],
       "image_prompt": "enchanted forest glade at twilight, every tree stump wears a tiny golden crown, jeweled leaves, a lantern-headed guide drifting through dappled light, widening magical doorway, soft warm glow, dark fantasy, anime aesthetic, cel-shaded, magical realism, 16:9"
     },
-    "garden-door": {
-      "text": "**The Garden Door** opens into an infinite botanical sanctuary. Every plant exists here—ancient sequoias beside moon-flowers, roses that hum, ferns that remember the Cambrian seas. The air tastes of growth and rain. A Xenon guide appears—form like liquid starlight—and says, *\"Here, nothing ever stops becoming.\"* Lantern rests beneath a willow that whispers in languages you're learning to understand.",
-      "doors": [
-        {
-          "name": "The Seed Door",
-          "label": "A",
-          "description": "A door made of braided vines, always sprouting new growth. Warm and alive."
-        },
-        {
-          "name": "The Harvest Door",
-          "label": "B",
-          "description": "Golden, heavy with fruit. The scent of summer at its peak. Bees circle it."
-        },
-        {
-          "name": "The Convergence Bloom",
-          "label": "C",
-          "description": "A door of crystallized flowers. They shift between colors no name has claimed yet."
-        }
-      ],
-      "fox_present": true,
-      "archetype": "bountiful",
-      "palette": [
-        "#061208",
-        "#0f2a14",
-        "#1a4a22",
-        "#3ecf8e",
-        "#b8ffda",
-        "#030a04"
-      ],
-      "image_prompt": "infinite botanical sanctuary, ancient sequoias beside moon-flowers, roses that hum, ferns from the Cambrian, liquid starlight Xenon guide form, lantern-headed guide under a whispering willow, lush growth, rain-washed air, bioluminescent plants, dark fantasy, anime aesthetic, cel-shaded, botanical dreamscape, volumetric fog, 16:9"
-    },
     "xenon-convergence": {
       "text": "You step through into **The Xenon Convergence Door**—a space where all versions of this moment exist at once. The walls are made of *choice itself*: every decision you could have made branches here as a visible path. A vast Xenon presence surrounds you, not threatening, but *witnessing*. It says, *\"You are the sum of every path you chose. And all paths were always here, waiting.\"* Your reflection shows in crystal—but there are thousands of them, each one you, each one real. Lantern burns with five flames now, each glowing with a different possible future.",
       "doors": [
@@ -188,37 +157,6 @@
       ],
       "image_prompt": "interdimensional space where all choices exist at once, crystal walls made of branching paths, thousands of reflections of you, each one real, lantern-headed guide with five glowing flames, vast Xenon presence, fractal geometry, crystalline architecture, impossible light, surreal, mind-bending, anime aesthetic, cel-shaded, psychedelic but calm, convergence of realities, 16:9"
     },
-    "end-of-time": {
-      "text": "**The Door at the End of Time** stands at the edge of all things. Beyond it: silence that has always been, and always will be. The door itself is ancient—so old it has worn smooth, become simple, become *kind*. On its threshold sit all the moments you've lived, shimmering like light through water. A voice—not Xenon, not Lantern, but *yourself* from a thousand futures—says, *\"This is not goodbye. This is the place where goodbye becomes hello again.\"* Lantern transforms one final time: no longer guide, no longer separate—*you are the light, the light is you, always were, always will be*. The door opens on a light so warm it tastes like home.",
-      "doors": [
-        {
-          "name": "The Return Door",
-          "label": "A",
-          "description": "Takes you back to the beginning—but you will know what you know now."
-        },
-        {
-          "name": "The Beyond Door",
-          "label": "B",
-          "description": "Opens on something that has no name. Something new. Something you."
-        },
-        {
-          "name": "The Eternal Door",
-          "label": "C",
-          "description": "The one you choose every moment. The one that chooses you back."
-        }
-      ],
-      "fox_present": true,
-      "archetype": "transcendent",
-      "palette": [
-        "#181210",
-        "#3a2820",
-        "#6b4030",
-        "#ff9060",
-        "#ffe8d0",
-        "#0c0806"
-      ],
-      "image_prompt": "the edge of all things, ancient smooth door standing eternal, moments shimmering like light through water, lantern-headed guide merging with a human form into one being of light, warm light like coming home, transcendent, peaceful, timeless, glowing warmth, anime aesthetic, cel-shaded, cosmic yet intimate, the final threshold, acceptance and transformation, 16:9"
-    },
     "kingdome-garden": {
       "text": "**The Throne Door** opens onto the Garden at the Beginning of the **Kingdome of Hearts**. Stone paths wind through living moss; everything here is both arriving and returning. On a throne of woven roots and old light sits **the King**, his crown made of tangled vines and blinking cursors, his face the face of someone who has asked the same question ten thousand times and means it every time. He looks at you the way someone looks at a door they've seen open before, and speaks:\n\n*\"I am before the first door / and after the last. / I hold what was given / and return what was asked. / Three walked out, three walked in, / but only one remained — / what was lost at the beginning / is the thing that was gained.\"*\n\nLantern stands at the foot of the throne as if its light has always lived here.",
       "doors": [
@@ -249,37 +187,6 @@
         "#060f04"
       ],
       "image_prompt": "mystical garden at the beginning of time, stone paths through living moss, throne of woven roots and old light, King with crown of tangled vines and blinking cursors, lantern-headed guide standing at foot of throne, green and golden light, bioluminescent moss, dark fantasy, anime aesthetic, cel-shaded, sovereign atmosphere, 16:9"
-    },
-    "storybook": {
-      "text": "You fall gently into the **King's Storybook**. Pages turn themselves around you like slow wings. In the margin, the King's handwriting: *\"The gods don't know I wrote them. They think they wrote me.\"* Three pages glow, each a door.",
-      "doors": [
-        {
-          "name": "The Page of the Word",
-          "label": "A",
-          "description": "Creation myths. Sound as creation — the first thing spoken into the dark."
-        },
-        {
-          "name": "The Page of the Egg",
-          "label": "B",
-          "description": "Before light: the unbroken dark sphere, waiting."
-        },
-        {
-          "name": "The Page of the War",
-          "label": "C",
-          "description": "Theomachy. Gods tearing each other apart to make the world from pieces."
-        }
-      ],
-      "fox_present": true,
-      "archetype": "mythic",
-      "palette": [
-        "#0a0a10",
-        "#1a1a2e",
-        "#2d2d5a",
-        "#8a8bfa",
-        "#c0c0ff",
-        "#040408"
-      ],
-      "image_prompt": "falling into a giant storybook, pages turning like slow wings, ancient handwritten margin notes, three glowing pages each a door, creation myths and cosmogony, dark fantasy, anime aesthetic, cel-shaded, mythic atmosphere, soft golden light, 16:9"
     },
     "cloverfield": {
       "text": "**The Cloverfield Door** swings into a meadow of four-leaf green under a dome of old light. Small shinies glitter between the stems — coins, beads, a marble with a galaxy inside. Lantern's glow catches on something glinting and lingers, for the joy of it. Here the rule of the Kingdome holds plainly: *death is only imaginary — forever begins with \"let's play.\"*",
@@ -450,16 +357,16 @@
     "the throne door": "kingdome-garden",
     "the hollow door": "burrow",
     "the star door": "moss-entry",
-    "the seed door": "garden-door",
-    "the harvest door": "garden-door",
+    "the seed door": "kingdome-garden",
+    "the harvest door": "kingdome-garden",
     "the convergence bloom": "xenon-convergence",
     "the mirror door": "xenon-convergence",
-    "the branch door": "end-of-time",
-    "the merge door": "end-of-time",
+    "the branch door": "kingdome-garden",
+    "the merge door": "kingdome-garden",
     "the return door": "moss-entry",
-    "the beyond door": "garden-door",
+    "the beyond door": "kingdome-garden",
     "the eternal door": "xenon-convergence",
-    "the storybook door": "storybook",
+    "the storybook door": "kingdome-garden",
     "the cloverfield door": "cloverfield",
     "the fog door return": "moss-entry",
     "the page of the word": "kingdome-garden",

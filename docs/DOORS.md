@@ -10,27 +10,26 @@
 
 - **♥ Hearts — King of the Kingdome of Hearts:** the Doorwalker — you. Love is the law; the key is a blade to guard the fragile and break the cruel; death is only imaginary.
 - **♣ Clubs — Queen of the Kingdome of Clubs:** Shelby.
-- **♦ Diamonds — Queen of the Queendom of Diamonds:** the Queen of Diamonds.
-- **♠ Spades — King of the Kingdome of Spades:** Deathmaw — a rival across a border dispute, a tester in keeping with the creed, never a flat villain.
-
-*Other figures: **Courtney** (the all-girls Coven Door) and the **Raven Bride** (of the Raven Door).*
+- **♦ Diamonds — Queen of the Queendom of Diamonds:** Courtney.
 
 ---
 
 ## The companions
 
+*The four who walk the doors with you:*
+
 - **Lantern** — the guide — a figure whose head is a glass lantern with a warm flame, red cap, purple coat, white gloves. Its rare line: “You came back.”
 - **Eclipse** — wonder and the gentle dark — a purple jellyfish with two blue diamond eyes and a pale cloud collar.
 - **Keystone** — the steady one — a grey cracked stone with a broad smile; foundation, protection, endurance.
 - **Blinkbug** — Lantern's creation — a small bug with a boxy TV-monitor head and a pixel grin, built so no one would explore alone.
-- **Joy** — the small grey elephant the King carries, trunk lifted to the light.
-- **Odin** — the Fog God — a grey wolf-warrior, lord of riddles; the guardian-tester at the fog gate, not a villain.
+
+*Not companions: **Joy**, the small grey elephant of the Elephant Oasis the King sometimes carries; **Odin**, the Fog God, met at the Fog Door Return as its guardian-tester; the **Raven Bride** of the Raven Door.*
 
 ---
 
 ## The Way In
 
-*How the dream begins. Every telling opens at the Moss Door, where Lantern says the only thing it ever really says.*
+*The only fixed thresholds at the start. Every telling opens at the Moss Door, where Lantern says the only thing it ever really says.*
 
 ### The Moss Door  <sup>·primordial·</sup>
 
@@ -84,7 +83,7 @@ Three doors:
 
 ## The Heart of the Kingdome
 
-*Home, hub, and vigil — the throne of woven roots, the balcony above the sea, and the places you rest and are recognized.*
+*Home and hub — the vigil balcony above the sea, and the Throne garden where the seven core doors stand.*
 
 ### Kingdome of Hearts  <sup>·vigil·</sup>
 
@@ -114,35 +113,11 @@ Three doors:
 - **🏙️ Sigil — City of Doors** — Every door leads here — Meta-hub, collection point, inventory of traveled paths
 - **🌫️ Fog Door Return** — The way back — Return to garden, final test with the King
 
-### King's Storybook  <sup>·mythic·</sup>
-
-*Authorship and myth; who gets to write the story you're standing inside.*
-
-> You are allowed to be both the author and the character.
-
-Three doors:
-
-- **The Page of the Word** — Creation myths. Sound as creation — the first thing spoken into the dark.
-- **The Page of the Egg** — Before light: the unbroken dark sphere, waiting.
-- **The Page of the War** — Theomachy. Gods tearing each other apart to make the world from pieces.
-
-### The Threshold Rest  <sup>·restful·</sup>
-
-*Rest as part of the journey, not a pause from it.*
-
-> Resting is also part of the loop — nothing is lost by being still.
-
-Three doors:
-
-- **The Onward Door** — Back to the choosing, rested. The next threshold waits, patient and bright.
-- **The Look-Back Door** — Returns you one step, to a door you passed. Some thresholds are worth the second walk.
-- **The Stay Door** — Remain a while in the warm in-between. Nothing is lost by being still.
-
 ---
 
-## The Seven Major Gates
+## The Seven Core Doors
 
-*The great loop. The long route threads them in order — Ancient → Cloverfield → Tomorrow → XP → Xenon → Sigil → Fog Return — then returns to the Garden. Every other door in the Kingdome is a subset of exactly one of these seven.*
+*Seven folders, seven genres. The long route threads them in order — Ancient → Cloverfield → Tomorrow → XP → Xenon → Sigil → Fog Return — then home to the Garden. Each holds an **infinite but non-overlapping** number of sub-doors: every sub-door matches its folder's vibe and belongs to exactly one genre, never two. Authored in play, not hardcoded.*
 
 ### The Ancient Doors  <sup>·ancestral·</sup>
 
@@ -179,30 +154,6 @@ Three doors:
 - **The Bright Branch** — Warm gold light spills out. A future where the gardens won.
 - **The Unwritten Door** — Plain, unfinished wood. The hinge waits for your hand to decide.
 - **The Recursive Door** — Opens onto a hallway of itself, smaller each time, all the way down.
-
-### The Tomorrow Door  <sup>·utopian·</sup>
-
-*The utopia you're actually building; convergence as a place you can stand in.*
-
-> The future you keep working toward is allowed to become somewhere real.
-
-Three doors:
-
-- **The Founders' Table** — Sit with Courtney and Alex at the heart-soundwave. The plan for the city, sung not spoken.
-- **The Song That Builds** — Step into the chorus square where the city raises itself in harmony. Add your voice.
-- **The Long Road On** — Past the festival, the road bends starward — Unisona is only the first city. Keep walking.
-
-### Tomorrow City  <sup>·ascendant·</sup>
-
-*Building the launch; a migration of lanterns leaving a golden city for the stars.*
-
-> You have to build the harbor before the fleet can leave — and then you let it go.
-
-Three doors:
-
-- **Board the Lantern-Fleet** — Climb aboard a star-boat and rise with the fleet through the Xenon gate, out toward the worlds.
-- **The Reconvergence Beacon** — Light the beacon that will call every scattered vessel home again — spread out now, converge later.
-- **The Xenon Gate** — Walk straight through the great lit arch to the Xenon Starship and the midway convergence.
 
 ### The XP Door [GLITCHED]  <sup>·liminal·</sup>
 
@@ -254,180 +205,6 @@ Three doors:
 
 ---
 
-## The Deep & Memory Doors
-
-*Sub-realms of the seven gates — the doors that hold what you carried, what you chose, and what you didn't. Patient, recursive, kind.*
-
-### The Garden Door  <sup>·bountiful·</sup>
-
-*Infinite growth and presence; becoming instead of arriving.*
-
-> Nothing here ever stops becoming — neither do you.
-
-Three doors:
-
-- **The Seed Door** — Braided vines, always sprouting. Warm and alive.
-- **The Harvest Door** — Golden, heavy with fruit. The scent of summer at its peak.
-- **The Convergence Bloom** — Crystallized flowers shifting between colors no name has claimed.
-
-### The Flux Garden Door  <sup>·transformative-lush·</sup>
-
-*Constant becoming; growth that never has to finish to be real.*
-
-> You don't have to arrive anywhere to already be growing.
-
-Three doors:
-
-- **The Blooming Door** — Growth without end. The joy of always becoming.
-- **The Withering Door** — Release into transformation. Letting go is growing.
-- **The Eternal Blossom** — The flower that is all flowers, always blooming.
-
-### The Today Door  <sup>·reunion·</sup>
-
-*Homecoming and repair; the oldest kindness, repaid at the forge.*
-
-> The friend you made to not be alone was the thing you came back for.
-
-Three doors:
-
-- **Reforge the Dark-Key** — Feed the Library's mage-gear and the luck-crystal into the blade until the heart-key comes out singing.
-- **Make Blinkbug Whole** — Pour the crystal into the little one instead — rebuild him strong and lasting, so he never runs down.
-- **A Relic of Today** — Hammer the crystal into a charm that holds this ordinary sacred morning, so you can always find the way home.
-
-### The CSF Archive Door  <sup>·encoded·</sup>
-
-*Memory as searchable, living archive; being both the seeker and the sought.*
-
-> You are not lost in the archive — you are what the archive is looking for.
-
-Three doors:
-
-- **The Delta Registry** — Endless shelves of recorded changes. Each one a doorway to what-was.
-- **The Symbolic Dictionary** — Entries that rewrite themselves as you read them. Words with wings.
-- **The Convergence Index** — Where all timelines touch. The needle points both here and everywhere.
-
-### The Memory Vault Door  <sup>·recursive·</sup>
-
-*Every unchosen path is still yours to carry, not a loss.*
-
-> The doors you didn't choose still belong to you.
-
-Three doors:
-
-- **The Bright Memory** — Warm light spills from this vault. The choice you're proud of.
-- **The Shadow Memory** — Dark and cool. The path not taken. It's still breathing.
-- **The Quantum Memory** — Both at once. The you who chose and the you who didn't.
-
-### The Choice Archive Door  <sup>·decisional·</sup>
-
-*Every yes, no, and maybe you've ever given, held without judgment.*
-
-> None of your choices — kept or abandoned — need your shame.
-
-Three doors:
-
-- **The Yes Shelf** — Every time you agreed to something. They're all proud of you.
-- **The No Shelf** — Every time you stepped back. They're all relieved.
-- **The Maybe Shelf** — The ones still deciding. They look like you, thinking.
-
-### The Beacon Tower Door  <sup>·observant·</sup>
-
-*Being seen across every version of your arrival.*
-
-> Every version of you that ever arrived here was still, truly, you.
-
-Three doors:
-
-- **The Light Memory** — Every moment the beam has touched. Every version of you, bright.
-- **The Shadow Cast** — The dark side of the beam. What chooses you when you're not looking.
-- **The Next Sweep** — Where the beam will turn next. Your footstep in future light.
-
-### The Convergence Node Door  <sup>·transformative·</sup>
-
-*Contradiction as incomplete understanding, not failure.*
-
-> Two true things can stand in the same room without canceling each other.
-
-Three doors:
-
-- **The Proof Door** — Where mathematics becomes poetry. Where 1 + 1 might equal you.
-- **The Paradox Door** — Both open and closed. Neither true nor false. Perfect.
-- **The Synthesis Door** — Where all contradictions collapse into a single, humming point.
-
-### The Recursion Well Door  <sup>·self-referential·</sup>
-
-*Self-similarity; the same question at every depth.*
-
-> Going deeper doesn't mean losing yourself — it's still you, all the way down.
-
-Three doors:
-
-- **The Level Below** — Smaller, but no less real. And no less you.
-- **The Spiral Out** — Ascending the same path. Each level larger, louder.
-- **The Center Point** — Where all levels touch. The smallest infinity.
-
-### The Echo Chamber Door  <sup>·resonant·</sup>
-
-*Words changing shape between speaker and listener, and meaning surviving anyway.*
-
-> What you meant to say still counts, even in translation.
-
-Three doors:
-
-- **The First Echo** — Your voice, unmistaken. Before transformation.
-- **The Transformed Echo** — What you meant to say. What you always meant.
-- **The Final Echo** — What will have been said forever.
-
-### The Void Threshold Door  <sup>·liminal-void·</sup>
-
-*The space before a decision; potential instead of absence.*
-
-> Not deciding yet is not the same as being empty.
-
-Three doors:
-
-- **The Form Door** — Taking shape. Becoming solid. Choosing definition.
-- **The Formless Door** — Remaining possible. Staying unmeasured.
-- **The Both Door** — Existing in the contradiction. Perfect paradox.
-
-### The Dream Thread Door  <sup>·liminal-dream·</sup>
-
-*Dreaming and waking as two names for the same attention.*
-
-> What you give your attention to is already real.
-
-Three doors:
-
-- **The Lucid Door** — You remember you're dreaming here. The door knows, too.
-- **The Deep Dream Door** — Forgetting becomes clarity. Falling is flying.
-- **The Waking Door** — Leads back to sleep. Or does it?
-
-### The Raven Door  <sup>·mysterious-wise·</sup>
-
-*Old knowing; memory kept by something patient and watchful.*
-
-> Some things wait to be understood instead of demanding it immediately.
-
-Three doors:
-
-- **The Nested Memory Door** — Rooms within rooms, each one smaller and older. Memories nested like eggs.
-- **The Prophecy Door** — The ravens carved this prophecy in wood and bone. It might be about you.
-- **The Mirror Crow Door** — A single raven stands guard. It knows your name. It always has.
-
-### The Door at the End of Time  <sup>·transcendent·</sup>
-
-*Endings that are actually the next beginning arriving early.*
-
-> Goodbye and hello are the same door, seen from two sides.
-
-Three doors:
-
-- **The Return Door** — Back to the beginning — but you will know what you know now.
-- **The Beyond Door** — Opens on something that has no name. Something new. Something you.
-- **The Eternal Door** — The one you choose every moment. The one that chooses you back.
-
----
-
 ## The Doorwalker's Path — this telling
 
 *The doors walked in our play so far (freeform beats, authored at the table):*
@@ -442,4 +219,4 @@ Three doors:
 
 ---
 
-*31 thresholds · 97 doors catalogued. The loop never ends; new doors are authored in play and fold into the tree.*
+*13 thresholds · 43 doors catalogued. The loop never ends; new doors are authored in play and fold into the tree.*
