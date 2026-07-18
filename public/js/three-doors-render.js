@@ -135,11 +135,9 @@ function appendSceneMsg(sceneKey, sceneData, geminiText, source) {
   // narration (see the kingdome-garden text in three-doors-data.js) — it
   // used to also gate a separate Q&A panel that repeated the same lines
   // a second time. Doors are always shown; no gate, no duplicate.
-  const doorHTML = `
-      <div class="doors-section">
-        <div class="doors-kicker">A, B, or C — choose your door</div>
-        <div class="doors-banner">${doorChipsHTML(doors)}</div>
-      </div>`;
+  // No A/B/C buttons — the player types their move in the text field below.
+  // (gameState.doors still routes a typed door name, or a bare A/B/C.)
+  const doorHTML = "";
 
   // One-line caption naming the moment (the skill's turn contract: the
   // painting is the scene; the caption names the beat).
@@ -250,24 +248,14 @@ function appendSceneMsg(sceneKey, sceneData, geminiText, source) {
   // renders first and stays if enrichment fails or times out.
   if (descEl) enrichScene(sceneKey, descEl, el);
 
-  // Show choice bar with labelled quick-picks + custom input
+  // The answer line is just the text field now — type a door of your own (or a
+  // bare A/B/C, or talk to Lantern). No quick-pick buttons.
   const bar = document.getElementById("choice-bar");
   const input = document.getElementById("custom-door-input");
   const picks = document.getElementById("door-quick-picks");
-  if (doors && doors.length) {
-    bar.style.display = "";
-    if (input) { input.value = ""; input.disabled = false; }
-    if (picks) {
-      picks.innerHTML = doors.map(d => `
-        <button class="door-pick" onclick="chooseDoor('${d.label}','${d.name.replace(/'/g,"\\'")}')">
-          <span class="door-letter">${d.label}</span>
-          <div class="door-pick-name">${d.name}</div>
-        </button>`).join("");
-    }
-  } else {
-    bar.style.display = "none";
-    if (picks) picks.innerHTML = "";
-  }
+  if (bar) bar.style.display = "";
+  if (input) { input.value = ""; input.disabled = false; }
+  if (picks) picks.innerHTML = "";
   gameState = {
     scene_key: sceneKey, doors, history,
     stage_index: sceneData.stage_index, stage_count: sceneData.stage_count,

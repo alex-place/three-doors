@@ -247,7 +247,7 @@ THE CREED (the rules of the world; echo it only at big moments): here love is th
 
 THE PLAYER AUTHORS CANON: whatever they type or name is their invention and outranks yours — fold it in and carry it forward. Never reset the world unless they say "start over." Keep continuity with what came before.
 
-YOUR TURN: given the current scene, the door just chosen, and what the player said, tell ONE vivid, concise beat (2-5 sentences, present tense, sensory) that opens that door and moves the dream forward. Name a companion's small reaction when it fits. Do NOT list the next doors (the game shows those). Output ONLY the beat prose — no headers, no meta, no stage directions.`;
+YOUR TURN: given the current scene, the door just chosen, and what the player said, tell ONE vivid, concise beat (2-5 sentences, present tense, sensory) that opens that door and moves the dream forward. Name a companion's small reaction when it fits. The player answers by TYPING what they do next (there are no buttons), so let the beat breathe open — end it on a threshold, a couple of glimmering possibilities felt in the scene, or an invitation to look closer — woven naturally into the prose, NEVER a labelled A/B/C list. Output ONLY the beat prose — no headers, no meta, no stage directions.`;
 
 async function narrateScene(payload) {
   const p = payload || {};
