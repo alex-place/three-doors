@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node tests/test_loop_engine.js && node tests/test_doors_routes.js",
+    "test": "node tests/test_loop_engine.js && node tests/test_doors_routes.js && node tests/test_keeper_memory.js",
     "curator": "node scripts/build-verify-gallery.js"
   },
   "dependencies": {

@@ -63,6 +63,24 @@ header { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
 #echoes .echo.in { opacity: 1; transform: none; }
 #echoes .echo::before { content: "◦ "; color: var(--gold); }
 
+/* ── the keepers speak (persistent agent personas) ── */
+#keepers { padding: 2px 24px 6px; display: flex; flex-direction: column; gap: 8px; }
+#keepers .keeper {
+  --k: var(--gold);
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 8px 12px 8px 11px; border-radius: 10px;
+  background: color-mix(in oklab, var(--k) 9%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--k) 30%, var(--line));
+  border-left: 3px solid var(--k);
+  opacity: 0; transform: translateY(5px); transition: opacity .7s, transform .7s;
+}
+#keepers .keeper.in { opacity: 1; transform: none; }
+#keepers .keeper .glyph { font-size: 20px; line-height: 1.35; filter: drop-shadow(0 0 6px color-mix(in oklab, var(--k) 60%, transparent)); }
+#keepers .keeper .said { flex: 1; }
+#keepers .keeper .who { font: 700 11px monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--k); }
+#keepers .keeper .who .mood { color: var(--dim); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+#keepers .keeper .line { color: var(--text); font-size: 14.5px; line-height: 1.5; margin-top: 1px; }
+
 /* ── the three doors ── */
 #ask { font: 700 12px monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin: 24px 4px 10px; }
 #doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }

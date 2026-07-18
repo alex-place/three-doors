@@ -26,6 +26,7 @@
   let art = { base: "", items: {}, timeline: {}, picks: null };
   let serverLive = false;
   let pendingNarration = null; // narration for the CURRENT scene (from the last choice)
+  let lastKeeperToken = null;  // one keeper reaction per distinct scene
 
   function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (_e) {} }
   function load() {
@@ -57,6 +58,9 @@
     } catch (_e) { serverLive = false; }
     $("mode").classList.toggle("live", serverLive);
     $("mode").innerHTML = '<span class="dot"></span>' + (serverLive ? "Lantern awake — Gemini on Vertex" : "Offline — inline canon engine");
+
+    // the keepers — persistent agent personas (persona + memory cube)
+    if (window.KeeperAgents) { try { await window.KeeperAgents.init({ serverLive: serverLive }); } catch (_e) {} }
 
     state = load() || E.newGame();
     if (!state.startedAt) state.startedAt = new Date().toISOString();
@@ -213,6 +217,47 @@
       ? "cr: " + rec.hypothesis + "  [conf " + rec.confidence + " · verified]"
       : "";
     if (!initial) save();
+    renderKeepers();
+  }
+
+  // The keepers speak: after the scene settles, the stage's keeper(s) recall
+  // what they remember of the Doorwalker and react in their own voice. One
+  // reaction per distinct scene; on the opening scene we wait for the narrated
+  // text (when the server is live) so they react to the real scene, not canon.
+  async function renderKeepers() {
+    if (!window.KeeperAgents) return;
+    const box = $("keepers");
+    const token = state.loop + ":" + state.stageIndex + ":" + state.journey.length;
+    if (serverLive && !pendingNarration && state.journey.length === 0) return; // opening narration pending
+    if (token === lastKeeperToken) return;
+    lastKeeperToken = token;
+    box.innerHTML = "";
+    const st = E.stage(state);
+    const lastTurn = [...state.journey].reverse().find((t) => t.kind === "turn") || null;
+    const ctx = {
+      stage: st.key, stageName: st.name,
+      scene: (pendingNarration && pendingNarration.scene) || E.sceneFor(state),
+      loop: state.loop, chosenDoor: (lastTurn && lastTurn.door) || "(arriving)",
+      symbols: Object.keys(state.symbols),
+    };
+    const speakers = window.KeeperAgents.speakersFor(st.key, lastTurn);
+    for (let i = 0; i < speakers.length; i++) {
+      if (token !== lastKeeperToken) return;         // a new scene began while we waited
+      let said = null;
+      try { said = await window.KeeperAgents.speak(speakers[i], ctx); } catch (_e) {}
+      if (token !== lastKeeperToken) return;
+      if (!said || !said.line) continue;
+      const div = document.createElement("div");
+      div.className = "keeper";
+      div.style.setProperty("--k", said.accent);
+      div.innerHTML = '<div class="glyph">' + escapeHtml(said.glyph) + "</div>"
+        + '<div class="said"><div class="who">' + escapeHtml(said.name)
+        + (said.mood ? '<span class="mood">· ' + escapeHtml(said.mood) + "</span>" : "")
+        + '</div><div class="line">' + escapeHtml(said.line) + "</div></div>";
+      box.appendChild(div);
+      void div.offsetWidth;
+      setTimeout(() => div.classList.add("in"), 60 + i * 140);
+    }
   }
 
   async function act(doorName, playerWords, doorArtPicked) {
@@ -246,13 +291,15 @@
     }
 
     setPhase("verify");
-    E.choose(state, doorName, {
+    const turn = E.choose(state, doorName, {
       ts: new Date().toISOString(),
       playerWords,
       beat: narrated && narrated.beat,
       symbol: narrated && narrated.symbol,
       art: doorArtPicked || null,
     });
+    // the keepers witness the door just walked (each forms its own memory)
+    if (window.KeeperAgents) window.KeeperAgents.witnessTurn(turn);
     setPhase("converge");
     pendingNarration = narrated;
     save();
@@ -286,6 +333,7 @@
       state = E.newGame();
       state.startedAt = new Date().toISOString();
       pendingNarration = null;
+      lastKeeperToken = null;
       save(); render();
     };
     boot();

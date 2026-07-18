@@ -111,6 +111,16 @@ Respond with ONLY a JSON object: {"beat": "<one sentence: what the chosen door d
 "echo": "<one line where the world remembers a specific past choice, or empty string>",
 "symbol": "<ONE lowercase word this turn adds to the player's constellation>"}`;
 
+// Models occasionally fence the JSON, add prose, or leave trailing commas.
+// One tolerant parser for every structured call (narrator + keepers).
+function parseModelJson(text) {
+  let raw = String(text).trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
+  const a = raw.indexOf("{"), b = raw.lastIndexOf("}");
+  if (a >= 0 && b > a) raw = raw.slice(a, b + 1);
+  try { return JSON.parse(raw); }
+  catch (_e) { return JSON.parse(raw.replace(/,\s*([}\]])/g, "$1")); }
+}
+
 async function loopTurn(payload) {
   const p = payload || {};
   const user = JSON.stringify({
@@ -135,19 +145,87 @@ async function loopTurn(payload) {
     // thought and truncates the visible JSON mid-string (same fix as lantern-os #1210).
     generationConfig: { temperature: 0.9, maxOutputTokens: 1200, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
   });
-  // Models occasionally fence the JSON or leave trailing commas — tolerate both.
-  let raw = String(text).trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
-  const a = raw.indexOf("{"), b = raw.lastIndexOf("}");
-  if (a >= 0 && b > a) raw = raw.slice(a, b + 1);
-  let parsed;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (_e) {
-    parsed = JSON.parse(raw.replace(/,\s*([}\]])/g, "$1"));
-  }
+  const parsed = parseModelJson(text);
   if (!parsed.scene || !Array.isArray(parsed.doors)) throw new Error("bad_shape");
   parsed.doors = parsed.doors.slice(0, 3).map((d) => ({ name: String(d.name || "").slice(0, 60), whisper: String(d.whisper || "").slice(0, 160) }));
   return parsed;
+}
+
+// ── the keepers: persistent agent personas ──────────────────────────────────
+// The persona (voice, boundaries, role — authored by Gage) is the AUTHORITY and
+// lives server-side in data/three-doors/keepers.json. The client owns each
+// player's per-keeper MEMORY (keeper-memory.js) and passes the recalled slice
+// in. This endpoint is the Hermes-style agent turn: persona + recalled memory →
+// one in-character line + a memory the keeper forms. Model is pluggable (same
+// Vertex path as the narrator); offline, the client speaks canon lines instead.
+let _keepers = null;
+function keepers() {
+  if (_keepers) return _keepers;
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "three-doors", "keepers.json"), "utf8"));
+    _keepers = {};
+    for (const k of j.keepers || []) _keepers[k.id] = k;
+  } catch (_e) { _keepers = {}; }
+  return _keepers;
+}
+
+function keeperSystem(k) {
+  const v = k.voice || {};
+  const lines = (v.sample_lines || []).map((l) => "  · " + l).join("\n");
+  const never = (v.never || []).concat(k.boundaries || []).map((n) => "  · " + n).join("\n");
+  const sig = v.signature_line
+    ? `Your signature line is "${v.signature_line}" — use it ONLY when it is truly earned, so it stays rare and real.`
+    : "";
+  return `You ARE ${k.name}, a keeper of THREE DOORS — the Kingdome of Hearts.
+Speak ONLY as ${k.name}, first person, in character. ${k.role}
+Voice: ${v.tone || ""}. Cadence: ${v.cadence || "brief"}.
+${sig}
+WORLD LAW (never break): the player is the Doorwalker; death is only imaginary — forever begins with "let's play"; there are NO wrong choices; never include a fox; never write stage directions or meta-commentary.
+Never:
+${never}
+Match the FEEL of these lines, do not quote them:
+${lines}
+Respond with ONLY a JSON object:
+{"line":"<what you say now — at most 2 sentences, in your voice; may be \\"\\" if nothing moves you>",
+"remember":"<one short new memory YOU form from this moment, first person, or \\"\\">",
+"mood":"<ONE lowercase word for how you feel>"}`;
+}
+
+const KEEPER_TEMP = { lantern: 0.75, eclipse: 0.95, keystone: 0.7, blinkbug: 0.95 };
+
+async function keeperSpeak(payload) {
+  const p = payload || {};
+  const k = keepers()[p.keeperId];
+  if (!k) throw new Error("unknown_keeper");
+  const mems = (p.memories || []).slice(0, 6).map((m) => "  · " + String(m).slice(0, 240)).join("\n");
+  const user = JSON.stringify({
+    scene: String(p.scene || "").slice(0, 700),
+    stage: p.stage || "", loop: p.loop || 1,
+    chosenDoor: p.chosenDoor || "(arriving)",
+    constellation: (p.symbols || []).slice(0, 12),
+    loopsWitnessedWithDoorwalker: p.loopsWitnessed || 0,
+  });
+  const parts = [{
+    text: "This is your moment to react. What you remember, most relevant first:\n" +
+      (mems || "  (nothing yet — this is early)") +
+      "\n\nThe scene right now:\n" + user,
+  }];
+  const text = await vertexCall({
+    systemInstruction: { parts: [{ text: keeperSystem(k) }] },
+    contents: [{ role: "user", parts }],
+    generationConfig: {
+      temperature: KEEPER_TEMP[p.keeperId] || 0.85,
+      maxOutputTokens: 400, responseMimeType: "application/json",
+      thinkingConfig: { thinkingBudget: 0 },   // same truncation guard as the narrator
+    },
+  });
+  const parsed = parseModelJson(text);
+  return {
+    keeperId: p.keeperId,
+    line: String(parsed.line || "").slice(0, 320),
+    remember: String(parsed.remember || "").slice(0, 240),
+    mood: String(parsed.mood || "").toLowerCase().replace(/[^a-z-]/g, "").slice(0, 24),
+  };
 }
 
 // ── plumbing ──
@@ -179,8 +257,27 @@ const server = http.createServer(async (req, res) => {
     });
     return;
   }
+  // a keeper reacts in-character (Hermes-style persona + client-recalled memory)
+  if (url.pathname === "/api/keeper/speak" && req.method === "POST") {
+    if (!PROJECT) return sendJson(res, 503, { error: "vertex_not_configured" });
+    let body = "";
+    req.on("data", (d) => { body += d; if (body.length > 32_000) req.destroy(); });
+    req.on("end", async () => {
+      try {
+        const payload = JSON.parse(body || "{}");
+        if (!payload.keeperId) return sendJson(res, 200, { ok: true, probe: true, keepers: Object.keys(keepers()) });
+        let out;
+        try { out = await keeperSpeak(payload); }
+        catch (first) { out = await keeperSpeak(payload); }   // one retry — flash truncates sometimes
+        sendJson(res, 200, { ok: true, ...out, via: "vertex" });
+      } catch (e) {
+        sendJson(res, 502, { error: String(e.message || e).slice(0, 200) });
+      }
+    });
+    return;
+  }
   // curated art data (lives beside the code in data/three-doors/, not public/)
-  if (url.pathname === "/data/art-timeline.json" || url.pathname === "/data/door-art-picks.json") {
+  if (url.pathname === "/data/art-timeline.json" || url.pathname === "/data/door-art-picks.json" || url.pathname === "/data/keepers.json") {
     const f = path.join(__dirname, "data", "three-doors", path.basename(url.pathname));
     if (fs.existsSync(f)) {
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
