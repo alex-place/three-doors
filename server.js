@@ -363,6 +363,65 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Three Doors progress — per-player save/load so a game follows the player
+  // across sessions/devices on this server (migration issue #2507).
+  if (url.pathname === "/api/three-doors/progress") {
+    const dir = path.join(__dirname, "data", "three-doors-progress");
+    const uid = (s) => (String(s || "anon").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64) || "anon");
+    if (req.method === "GET") {
+      const f = path.join(dir, uid(url.searchParams.get("userId")) + ".json");
+      if (fs.existsSync(f)) { try { return sendJson(res, 200, JSON.parse(fs.readFileSync(f, "utf8"))); } catch (_e) {} }
+      return sendJson(res, 200, {});
+    }
+    if (req.method === "POST") {
+      let body = "";
+      req.on("data", (d) => { body += d; if (body.length > 256_000) req.destroy(); });
+      req.on("end", () => {
+        try {
+          const p = JSON.parse(body || "{}");
+          fs.mkdirSync(dir, { recursive: true });
+          fs.writeFileSync(path.join(dir, uid(p.userId) + ".json"), JSON.stringify(p));
+          sendJson(res, 200, { ok: true });
+        } catch (_e) { sendJson(res, 400, { error: "bad progress" }); }
+      });
+      return;
+    }
+  }
+
+  // Optional server-side image generation. Standalone paints client-side via
+  // Pollinations, so this cleanly answers "no" (200, not a 404) and the client
+  // falls back — a hook to wire a real image model (Imagen/gpt-image) later.
+  if (url.pathname === "/api/image/ai-generate" && req.method === "POST") {
+    let body = ""; req.on("data", (d) => { body += d; if (body.length > 8000) req.destroy(); });
+    req.on("end", () => sendJson(res, 200, { ok: false, reason: "generation is client-side (Pollinations) in standalone" }));
+    return;
+  }
+
+  // Optional vision grounding (describe the painting for a richer beat). Not
+  // wired in standalone — answers cleanly so the narrator grounds on the prompt
+  // instead of 404ing. A hook to wire Gemini vision later.
+  if (url.pathname === "/api/vision/analyze" && req.method === "POST") {
+    let body = ""; req.on("data", (d) => { body += d; if (body.length > 12_000_000) req.destroy(); });
+    req.on("end", () => sendJson(res, 200, { ok: false }));
+    return;
+  }
+
+  // Three Doors metrics — append-only JSONL event log (migration issue #2507).
+  if (url.pathname === "/api/metrics/three-doors" && req.method === "POST") {
+    let body = "";
+    req.on("data", (d) => { body += d; if (body.length > 32_000) req.destroy(); });
+    req.on("end", () => {
+      try {
+        const evt = JSON.parse(body || "{}");
+        const dir = path.join(__dirname, "data", "metrics");
+        fs.mkdirSync(dir, { recursive: true });
+        fs.appendFile(path.join(dir, "three-doors.jsonl"), JSON.stringify(evt) + "\n", () => {});
+        sendJson(res, 200, { ok: true });
+      } catch (_e) { sendJson(res, 400, { error: "bad event" }); }
+    });
+    return;
+  }
+
   // curated art data (lives beside the code in data/three-doors/, not public/)
   if (url.pathname === "/data/art-timeline.json" || url.pathname === "/data/door-art-picks.json" || url.pathname === "/data/keepers.json") {
     const f = path.join(__dirname, "data", "three-doors", path.basename(url.pathname));

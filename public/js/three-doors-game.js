@@ -5,7 +5,15 @@
 
 // ── State ─────────────────────────────────────────────────────────
 let gameState = null;
-let userId = "web-" + Math.random().toString(36).slice(2, 9);
+// Stable per-player id (persisted) so progress + metrics follow the player
+// across sessions — the backend saves under this id (migration issue #2507).
+let userId = (() => {
+  try {
+    let u = localStorage.getItem("three-doors-user");
+    if (!u) { u = "web-" + Math.random().toString(36).slice(2, 9); localStorage.setItem("three-doors-user", u); }
+    return u;
+  } catch (_e) { return "web-" + Math.random().toString(36).slice(2, 9); }
+})();
 let doorsLocked = false;
 let serverAvailable = null;
 let narratorEnabled = localStorage.getItem("three-doors-narrator") !== "off";
@@ -139,7 +147,7 @@ async function syncProgressToBackend() {
     await fetch("/api/three-doors/progress", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(playerProgress),
+      body: JSON.stringify({ ...playerProgress, userId }),
     });
   } catch (e) {
     // Backend sync is optional, fail silently
@@ -148,7 +156,7 @@ async function syncProgressToBackend() {
 
 async function loadProgressFromBackend() {
   try {
-    const resp = await fetch("/api/three-doors/progress");
+    const resp = await fetch("/api/three-doors/progress?userId=" + encodeURIComponent(userId));
     if (resp.ok) {
       const data = await resp.json();
       if (data && data.lastPlayed) {
@@ -880,19 +888,9 @@ async function startGame() {
 
 // ── Cube delta writer ────────────────────────────────────────────
 async function writeCubeDelta(eventType, symbols, payloadRef, extra) {
-  try {
-    await fetch('/api/cubes/alex/delta', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        source_surface: 'explore',
-        event_type: eventType,
-        symbols: symbols || [],
-        payload_ref: payloadRef || '',
-        coordinate: extra?.coordinate || '',
-      }),
-    });
-  } catch (e) { /* silent — cube is best-effort */ }
+  // The lantern-os "cube" telemetry has no standalone equivalent; door choices
+  // are already recorded via logThreeDoorsEvent → /api/metrics/three-doors.
+  void eventType; void symbols; void payloadRef; void extra;
 }
 
 async function chooseDoor(label, name) {
@@ -941,7 +939,6 @@ function resetGame(skipConfirm) {
   if (btn) { btn.textContent = "↺ New"; btn.setAttribute("onclick", "resetGame()"); }
   document.getElementById("chat").innerHTML = "";
   gameState = null;
-  userId = "web-" + Math.random().toString(36).slice(2, 9);
   const inp = document.getElementById("custom-door-input");
   if (inp) inp.value = "";
   document.getElementById("choice-bar").style.display = "none";
