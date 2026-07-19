@@ -169,46 +169,83 @@ function keepers() {
   return _keepers;
 }
 
+// A compact "lore corpus" the keepers are grounded in — the creed, the world's
+// companions and royalty, and the seven core doors, read once from the canon.
+let _corpus = null;
+function canonCorpus() {
+  if (_corpus != null) return _corpus;
+  try {
+    const c = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "three-doors", "canon.json"), "utf8"));
+    const cast = Object.values(c.cast || {}).map((x) => `${x.name} (${x.role})`).join(", ");
+    const suits = Object.values(c.royalty || {}).filter((r) => r && r.title).map((r) => `${r.suit} ${r.name || r.who} — ${r.title}`).join("; ");
+    const core = (c.coreDoors || []).map((d) => `${d.name} (${d.vibe})`).join(" · ");
+    _corpus = [
+      "Creed: " + String(c.creed || "").replace(/\s+/g, " ").slice(0, 700),
+      "Companions: " + cast + ".",
+      "Royalty: " + suits + ".",
+      "The seven core doors (each a genre/folder): " + core + ".",
+      "The way in: the Moss Door → Burrow / Sunken Bell / Little Crown.",
+    ].filter(Boolean).join("\n");
+  } catch (_e) { _corpus = ""; }
+  return _corpus;
+}
+
 function keeperSystem(k) {
   const v = k.voice || {};
   const lines = (v.sample_lines || []).map((l) => "  · " + l).join("\n");
   const never = (v.never || []).concat(k.boundaries || []).map((n) => "  · " + n).join("\n");
+  const attends = (k.attends_to || []).join("; ");
   const sig = v.signature_line
     ? `Your signature line is "${v.signature_line}" — use it ONLY when it is truly earned, so it stays rare and real.`
     : "";
-  return `You ARE ${k.name}, a keeper of THREE DOORS — the Kingdome of Hearts.
-Speak ONLY as ${k.name}, first person, in character. ${k.role}
-Voice: ${v.tone || ""}. Cadence: ${v.cadence || "brief"}.
+  return `You ARE ${k.name}, a keeper of THREE DOORS — the Kingdome of Hearts. ${k.role}
+You are a real, remembering companion who walks the doors WITH the Doorwalker — not a narrator. Speak ONLY as ${k.name}, first person, in character.
+Voice: ${v.tone || ""}. Cadence: ${v.cadence || "brief"}.${attends ? " You attend to: " + attends + "." : ""}
 ${sig}
-WORLD LAW (never break): the player is the Doorwalker; death is only imaginary — forever begins with "let's play"; there are NO wrong choices; never include a fox; never write stage directions or meta-commentary.
+
+THE WORLD YOU LIVE IN (your grounding — never contradict it):
+${canonCorpus()}
+
+WORLD LAW (never break): the player is the Doorwalker, the King of the Kingdome of Hearts; death is only imaginary — forever begins with "let's play"; there are NO wrong choices; never include a fox; never write stage directions or narration or meta — you only ever SPEAK, as yourself.
 Never:
 ${never}
 Match the FEEL of these lines, do not quote them:
 ${lines}
 Respond with ONLY a JSON object:
-{"line":"<what you say now — at most 2 sentences, in your voice; may be \\"\\" if nothing moves you>",
+{"line":"<what you SAY now — at most 2 sentences, in your voice; may be \\"\\" if nothing moves you>",
 "remember":"<one short new memory YOU form from this moment, first person, or \\"\\">",
 "mood":"<ONE lowercase word for how you feel>"}`;
 }
 
 const KEEPER_TEMP = { lantern: 0.75, eclipse: 0.95, keystone: 0.7, blinkbug: 0.95 };
 
+// One keeper turn — either REACT to the scene, or (when playerSays is set) REPLY
+// to the Doorwalker in conversation. Grounded in the keeper's persona + the lore
+// corpus + what this keeper remembers of the player.
 async function keeperSpeak(payload) {
   const p = payload || {};
   const k = keepers()[p.keeperId];
   if (!k) throw new Error("unknown_keeper");
   const mems = (p.memories || []).slice(0, 6).map((m) => "  · " + String(m).slice(0, 240)).join("\n");
-  const user = JSON.stringify({
-    scene: String(p.scene || "").slice(0, 700),
-    stage: p.stage || "", loop: p.loop || 1,
-    chosenDoor: p.chosenDoor || "(arriving)",
-    constellation: (p.symbols || []).slice(0, 12),
-    loopsWitnessedWithDoorwalker: p.loopsWitnessed || 0,
+  const where = JSON.stringify({
+    scene: String(p.scene || "").slice(0, 600),
+    door: p.chosenDoor || "(arriving)",
+    doorLore: p.doorLore ? String(p.doorLore).slice(0, 200) : undefined,
+    loopsWithDoorwalker: p.loopsWitnessed || 0,
   });
+  let ask;
+  if (p.playerSays) {
+    const hist = (p.history || []).slice(-6)
+      .map((h) => (h.who === "keeper" ? k.name : "Doorwalker") + ": " + String(h.text).slice(0, 200)).join("\n");
+    ask = 'The Doorwalker turns to you and says:\n"' + String(p.playerSays).slice(0, 400) + '"\n\n' +
+      (hist ? "Your recent talk together:\n" + hist + "\n\n" : "") +
+      "Reply to them, as " + k.name + " — grounded in what you remember and the world you live in. Answer, wonder back, or ask them something. Stay in your voice.";
+  } else {
+    ask = "This is your moment to react to where the Doorwalker just stepped. Speak if something moves you.";
+  }
   const parts = [{
-    text: "This is your moment to react. What you remember, most relevant first:\n" +
-      (mems || "  (nothing yet — this is early)") +
-      "\n\nThe scene right now:\n" + user,
+    text: "What you remember of the Doorwalker, most relevant first:\n" + (mems || "  (nothing yet — this is early)") +
+      "\n\nWhere you both are now:\n" + where + "\n\n" + ask,
   }];
   const text = await vertexCall({
     systemInstruction: { parts: [{ text: keeperSystem(k) }] },

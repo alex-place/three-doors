@@ -880,6 +880,7 @@ async function startGame() {
   doorsLocked = true;
   appendTyping();
   await checkServer();
+  if (window.ThreeDoorsKeepers) { try { await window.ThreeDoorsKeepers.init({ serverLive: serverAvailable }); } catch (_e) {} }
 
   const result = await getSceneData("start", "");
   if (result) appendSceneMsg(result.data.scene_key, result.data, result.geminiText, result.source);

@@ -246,6 +246,21 @@ function appendSceneMsg(sceneKey, sceneData, geminiText, source) {
   if (typeof sceneData.stage_index === "number") {
     updateStageBreadcrumb(sceneData.stage_index, sceneData.loop_count ?? 0);
   }
+
+  // The keepers speak — the DIALOG half of the turn. After the narration beat
+  // settles, the scene's keeper(s) react in character, grounded in the lore and
+  // what they remember of the Doorwalker (they talk back through the input too).
+  if (window.ThreeDoorsKeepers) {
+    const doorName = (gameState && gameState.last_choice) || (history.filter(h => String(h).startsWith("Chose ")).slice(-1)[0] || "").replace("Chose ", "");
+    setTimeout(() => {
+      window.ThreeDoorsKeepers.afterScene(sceneKey, {
+        scene: (scene.text || sceneData.text || displayText || "").replace(/\*/g, "").slice(0, 400),
+        chosenDoor: doorName,
+        doorLore: (scene.theme || "") + (scene.lesson ? " — " + scene.lesson : ""),
+        turn: { stageKey: sceneKey, stageName: caption || sceneKey, door: doorName || "(arriving)", symbol: "", loop: 1, custom: false, ts: new Date().toISOString() },
+      });
+    }, 2600);
+  }
 }
 
 // Stage breadcrumb — 7 dots showing current position + loop counter
