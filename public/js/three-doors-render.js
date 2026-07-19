@@ -170,11 +170,9 @@ function appendSceneMsg(sceneKey, sceneData, geminiText, source) {
     <div class="message-content">
       ${breadcrumb}
       <div class="scene-image">
-        <img id="${imgId}" alt="Scene art" style="display:none"
-          onload="this.style.display='';document.getElementById('${canvasId}').style.display='none';logThreeDoorsEvent('image_load', { sceneKey: '${sceneKey}', source: 'image' })">
-        <canvas id="${canvasId}" width="800" height="450"></canvas>
+        <img id="${imgId}" alt="Scene art" style="display:none">
         <button class="img-replace" title="Replace this scene's picture with your own render (e.g. from ChatGPT) — it will be remembered for this door"
-          onclick="replaceSceneImage('${imgId}','${canvasId}','${sceneKey}')">⤢ Replace</button>
+          onclick="replaceSceneImage('${imgId}','','${sceneKey}')">⤢ Replace</button>
       </div>
       <div class="scene-caption">${caption}</div>
       <div id="${descId}" class="scene-narration">${md(displayText)}</div>
@@ -197,50 +195,30 @@ function appendSceneMsg(sceneKey, sceneData, geminiText, source) {
   // doing so made image loading depend on requestAnimationFrame actually
   // firing, which browsers throttle or fully suspend in a backgrounded tab.
   // Kicking off the network request has nothing to do with painting.
-  const cvsEl = el.querySelector(`#${canvasId}`);
   const imgEl = el.querySelector(`#${imgId}`);
   const descEl = el.querySelector(`#${descId}`);
 
-  // Draw canvas placeholder immediately, then load image by priority:
-  // 1. Curated R2 art or server generation (getSceneImageUrl)
-  // 2. Pollinations fallback
-  if (cvsEl) drawScene(cvsEl, sceneKey);
-  // A picture the player chose for this door wins over anything generated —
-  // once you replace a scene's image, it's remembered for that door.
+  // Gallery-only art. The player's own replacement wins; otherwise the curated
+  // gallery images for this scene, tried in order so a missing CDN image falls
+  // back to another GALLERY image — never a generated one, never a placeholder.
   const override = playerProgress?.imageOverrides?.[sceneKey];
-  const imageUrl = override || getSceneImageUrl(sceneKey);
-  if (imageUrl && imgEl) {
-    imgEl.onerror = () => loadPollinationsImage(imgId, canvasId, sceneKey);
-    imgEl.onload = () => {
-      if (cvsEl) cvsEl.style.display = "none";
-      imgEl.style.display = "";
-      window.__sceneArt = { sceneKey, prompt: sceneData.image_prompt || SD_PROMPTS[sceneKey] || (scene.text || "").slice(0, 200), url: imageUrl };
-      logThreeDoorsEvent("image_load", { sceneKey, source: "curated" });
+  const gallery = (typeof getSceneImages === "function" ? getSceneImages(sceneKey) : []).slice();
+  for (let i = gallery.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [gallery[i], gallery[j]] = [gallery[j], gallery[i]]; }
+  const artPicks = (override ? [override] : []).concat(gallery);
+  if (imgEl && artPicks.length) {
+    let idx = 0;
+    const tryNext = () => {
+      if (idx >= artPicks.length) return;      // no gallery image loaded — leave the frame empty
+      const url = artPicks[idx++];
+      imgEl.onerror = tryNext;
+      imgEl.onload = () => {
+        imgEl.style.display = "";
+        window.__sceneArt = { sceneKey, url };
+        logThreeDoorsEvent("image_load", { sceneKey, source: (override && url === override) ? "replaced" : "gallery" });
+      };
+      imgEl.src = url;
     };
-    imgEl.src = imageUrl;
-  } else {
-    loadPollinationsImage(imgId, canvasId, sceneKey);
-  }
-
-  // Wire SD prompt copy for both img and canvas
-  const sdPrompt = sceneData.image_prompt || SD_PROMPTS[sceneKey] || "";
-  if (imgEl) {
-    imgEl.title = sdPrompt;
-    imgEl.style.cursor = "pointer";
-    imgEl.onclick = () => {
-      navigator.clipboard.writeText(sdPrompt).catch(() => {});
-      imgEl.title = "Copied!";
-      setTimeout(() => { imgEl.title = sdPrompt; }, 1500);
-    };
-  }
-  if (cvsEl) {
-    cvsEl.title = sdPrompt;
-    cvsEl.style.cursor = "pointer";
-    cvsEl.onclick = () => {
-      navigator.clipboard.writeText(sdPrompt).catch(() => {});
-      cvsEl.title = "Copied!";
-      setTimeout(() => { cvsEl.title = sdPrompt; }, 1500);
-    };
+    tryNext();
   }
 
   // Async-enrich: narration grounded on the painting + play context, and
