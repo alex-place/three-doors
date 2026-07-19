@@ -8,8 +8,7 @@ let lanternBusy = false;
 async function askLantern(text) {
   if (lanternBusy) return;
   lanternBusy = true;
-  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  appendUserMsg(esc(text));
+  appendUserMsg(text); // appendUserMsg escapes
   appendTyping();
 
   const scene = SCENES[gameState?.scene_key] || {};

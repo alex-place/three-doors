@@ -486,7 +486,11 @@ function appendUserMsg(text) {
   const chat = document.getElementById("chat");
   const el = document.createElement("div");
   el.className = "message user";
-  el.innerHTML = `<div class="message-content">${text}</div>`;
+  // The player's own words — escape at this single choke point (they may type
+  // anything, including "<", "&"), so every caller can pass raw text safely.
+  const safe = String(text == null ? "" : text)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  el.innerHTML = `<div class="message-content">${safe}</div>`;
   chat.appendChild(el);
   chat.scrollTop = chat.scrollHeight;
 }
@@ -573,8 +577,28 @@ function resolveDoorTarget(doorName, spineIndex) {
     }
   }
   if (target && SCENES[target]) return target;
+  // The player phrased a destination inside a free-typed move — "a door to
+  // sigil", "step into the fog", "back to the garden". Honor where they say to
+  // go even when it isn't a canonical door label, so their words steer the map.
+  for (const [re, dest] of DEST_HINTS) {
+    if (re.test(norm) && SCENES[dest]) return dest;
+  }
   return STAGES[(spineIndex + 1) % STAGES.length];   // onward fallback = next gate
 }
+
+// Distinctive words → the door/realm they name. First match wins; order matters
+// (specific realms before the broad "home"). Only used as a fallback when the
+// typed move isn't a known door label.
+const DEST_HINTS = [
+  [/\b(sigil|city of doors)\b/, "sigil-city"],
+  [/\b(fog|the way back|way home|return home|go home|head home)\b/, "fog-door-return"],
+  [/\b(xenon|starship|star ?ship|planets?|cosmos|the stars|outer space)\b/, "xenon-convergence"],
+  [/\b(xp|glitch(ed)?|windows xp|liminal)\b/, "xp-door"],
+  [/\b(tomorrow|the future|future door|what'?s coming|whats coming)\b/, "future-doors"],
+  [/\b(clover(field)?|shinies?|lucky door|the today door)\b/, "cloverfield"],
+  [/\b(ancient|the deep door|temple|history door|evolution)\b/, "ancient-doors"],
+  [/\b(garden|the throne|throne door|the king\b|kingdome|come home|the hub)\b/, "kingdome-garden"],
+];
 
 // Xenon Starship specific logic
 function handleXenonStarship(doorName) {
@@ -913,7 +937,10 @@ async function chooseDoor(label, name) {
   const input = document.getElementById("custom-door-input");
   if (bar) bar.style.opacity = "0.4";
   if (input) input.disabled = true;
-  appendUserMsg(label === "CUSTOM" ? `I step through: ${name}` : `Choice ${label} — ${name}`);
+  // Echo the player's own words for a custom move (they phrased it); name the
+  // door for a quick-pick. "I look at the bead" reads as itself, not
+  // "I step through: I look at the bead". (appendUserMsg escapes.)
+  appendUserMsg(label === "CUSTOM" ? name : `Choice ${label} — ${name}`);
   appendTyping();
 
   const result = await getSceneData("choose", label === "CUSTOM" ? name : label);
@@ -949,30 +976,46 @@ function resetGame(skipConfirm) {
   saveProgress();
 }
 
+// Is the player TALKING to a keeper, or DOING something? A question (or a line
+// addressed to a keeper by name) is dialog — the keeper answers, the world holds
+// still. Everything else is a MOVE — what you say you do, you do, and the story
+// advances. This split is the whole game: your actions are never just small-talk.
+function isSpokenToKeeper(val) {
+  const s = val.trim().toLowerCase();
+  // Addressed to a keeper by name at the start ("Eclipse, what do you see?")
+  if (/^(lantern|eclipse|keystone|blinkbug)\b[\s,:.!?]/.test(s)) return true;
+  // A pure question — asking, not doing
+  if (s.endsWith("?")) return true;
+  if (/^(who|whats|what's|what|where|when|why|how|which|whose|are you|do you|did you|does |have you|has |had you|can you|could you|would you|will you|should i|is it|is there|is this|is that|am i|tell me|remember|remind|hi|hey|hello|thanks|thank you)\b/.test(s)) return true;
+  return false;
+}
+
 function submitCustomDoor() {
   const input = document.getElementById("custom-door-input");
   if (!input || !gameState) return;
   const val = input.value.trim();
   if (!val) return;
-  // Everything the player types is an authored desire — the grounded
-  // narrator folds these into future doors (their inventions outrank ours).
-  if (!playerProgress.customDesires) playerProgress.customDesires = [];
-  playerProgress.customDesires = [...playerProgress.customDesires, val].slice(-8);
-  saveProgress();
   const upper = val.toUpperCase();
-  // Door label (A/B/C) or full door name — route to known door
+  // Door label (A/B/C) or full door name — route to known door (a MOVE)
   const knownDoor = gameState.doors?.find(d =>
     d.label.toUpperCase() === upper || d.name.toUpperCase() === upper);
   if (knownDoor) {
+    input.value = "";
     chooseDoor(knownDoor.label, knownDoor.name);
     return;
   }
-  // Single word — the player named their own door (engine accepts one-word custom doors)
-  if (!/\s/.test(val)) {
-    chooseDoor("CUSTOM", val);
+  // A question, or a line addressed to a keeper — dialog, no scene change.
+  if (isSpokenToKeeper(val)) {
+    input.value = "";
+    askLantern(val);
     return;
   }
-  // Anything conversational — talk to Lantern, in persona, inside the scene
+  // Otherwise it's what you DO. Record it as an authored desire (the grounded
+  // narrator folds these into future beats — your inventions outrank ours) and
+  // ADVANCE the story: the narrator paints what happens, the keepers react.
+  if (!playerProgress.customDesires) playerProgress.customDesires = [];
+  playerProgress.customDesires = [...playerProgress.customDesires, val].slice(-8);
+  saveProgress();
   input.value = "";
-  askLantern(val);
+  chooseDoor("CUSTOM", val);
 }
